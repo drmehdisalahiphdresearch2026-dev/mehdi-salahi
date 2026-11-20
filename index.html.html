@@ -1,0 +1,1821 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>واژه‌سنج | نسخهٔ مدیریتی — سطح سفارشی، املا، آپلود گرامر</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Vazirmatn:wght@300;400;500;700;900&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#e9f6ff; --panel:#ffffff; --panel2:#dff1ff; --line:#c4deef; --line2:#92c2df;
+  --ink:#17364a; --mut:#58778a; --amber:#e88928; --amber2:#f2a44d; --teal:#159b9a;
+  --sky:#339bd1; --coral:#dc6472; --gold:#d99a23; --green:#39a978; --pink:#d45d9a;
+  --card:#fff; --soft:#f4faff; --topbar:rgba(233,246,255,.94);
+}
+[data-theme="sky"]{--bg:#e9f6ff;--panel:#fff;--panel2:#dff1ff;--line:#c4deef;--line2:#92c2df;--ink:#17364a;--mut:#58778a;--card:#fff;--soft:#f4faff;--topbar:rgba(233,246,255,.94);--teal:#159b9a;--amber:#e88928;--sky:#339bd1;--coral:#dc6472;--green:#39a978;--pink:#d45d9a}
+[data-theme="violet"]{--bg:#f3edff;--panel:#fff;--panel2:#eee4ff;--line:#d8c9f0;--line2:#bba3df;--ink:#35264f;--mut:#76658f;--card:#fff;--soft:#faf7ff;--topbar:rgba(243,237,255,.94);--teal:#8253bc;--amber:#d58b32;--sky:#678fce;--coral:#d56b83;--green:#4b9d78;--pink:#cf5eaa}
+[data-theme="mint"]{--bg:#e9f8f1;--panel:#fff;--panel2:#ddf2e8;--line:#bfdfcf;--line2:#8fc6aa;--ink:#1b4438;--mut:#5b7c70;--card:#fff;--soft:#f4fbf7;--topbar:rgba(233,248,241,.94);--teal:#168b72;--amber:#d78b35;--sky:#438fc2;--coral:#d56266;--green:#369564;--pink:#c85d8c}
+[data-theme="peach"]{--bg:#fff1e8;--panel:#fff;--panel2:#ffe5d5;--line:#f0cdb9;--line2:#dfa887;--ink:#513326;--mut:#8b6856;--card:#fff;--soft:#fff8f3;--topbar:rgba(255,241,232,.94);--teal:#168f87;--amber:#d77828;--sky:#4b91bd;--coral:#d45f58;--green:#478e60;--pink:#cf5681}
+[data-theme="pink"]{--bg:#fff0f6;--panel:#fff;--panel2:#ffe0ed;--line:#efc5d8;--line2:#dc9fba;--ink:#4a2d40;--mut:#88647a;--card:#fff;--soft:#fff7fa;--topbar:rgba(255,240,246,.94);--teal:#168b91;--amber:#d4872e;--sky:#548dc1;--coral:#d35975;--green:#448f6e;--pink:#c94f90}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Vazirmatn,Tahoma,sans-serif;color:var(--ink);min-height:100vh;overflow-x:hidden;
+  background:
+    radial-gradient(1100px 560px at 88% -8%, rgba(47,214,195,.13), transparent 60%),
+    radial-gradient(900px 520px at -8% 108%, rgba(255,184,77,.11), transparent 60%),
+    radial-gradient(700px 400px at 50% 45%, rgba(92,195,255,.05), transparent 65%),
+    var(--bg);}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:radial-gradient(rgba(233,244,244,.05) 1px, transparent 1px);background-size:26px 26px;
+  -webkit-mask-image:radial-gradient(80% 70% at 50% 30%, #000 30%, transparent 100%);
+          mask-image:radial-gradient(80% 70% at 50% 30%, #000 30%, transparent 100%);}
+::selection{background:rgba(255,184,77,.35)}
+::-webkit-scrollbar{width:10px;height:8px}
+::-webkit-scrollbar-thumb{background:var(--line);border-radius:8px}
+#floaters{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+#floaters span{position:absolute;bottom:-8vh;font-family:"Space Grotesk",sans-serif;font-weight:700;color:rgba(233,244,244,.05);animation:rise linear infinite}
+@keyframes rise{to{transform:translateY(-118vh) rotate(18deg)}}
+.topbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  padding:11px 20px;background:var(--topbar);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.logo{display:flex;align-items:center;gap:10px;font-family:Lalezar;font-size:25px}
+.logo svg{filter:drop-shadow(0 0 8px rgba(255,184,77,.5))}
+.logo small{font-family:Vazirmatn;font-size:10.5px;color:var(--mut);display:block;margin-top:-6px}
+nav{display:flex;gap:3px;overflow-x:auto;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+nav a{color:var(--mut);text-decoration:none;font-size:12.5px;font-weight:600;padding:7px 11px;border-radius:10px;white-space:nowrap;transition:.25s}
+nav a:hover,nav a.on{color:var(--ink);background:var(--panel2);box-shadow:inset 0 0 0 1px var(--line2)}
+.pills{display:flex;gap:8px;margin-inline-start:auto;align-items:center;flex-wrap:wrap}
+.pill{display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;padding:6px 12px;border-radius:999px;border:1px solid var(--line2);background:var(--panel);transition:.3s}
+.pill.xp{color:var(--gold)} .pill.streak{color:var(--coral)}
+.pill.save{cursor:pointer;color:var(--teal);border-color:rgba(47,214,195,.45);font-family:Vazirmatn}
+.pill.save:hover{background:rgba(47,214,195,.12)}
+.pill.save span{color:var(--mut);font-weight:400;font-size:11px}
+.pill.bump{animation:bump .5s}
+@keyframes bump{40%{transform:scale(1.15)}}
+.ticker{flex-basis:100%;font-size:12px;color:var(--mut);overflow:hidden;white-space:nowrap;border-top:1px dashed var(--line);margin-top:3px;padding-top:5px}
+.ticker b{color:var(--teal);font-family:"Space Grotesk"}
+.ticker .tk{display:inline-block;transition:opacity .5s,transform .5s}
+.ticker .tk.out{opacity:0;transform:translateY(-8px)}
+main{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:22px 20px 60px}
+.sec-head{display:flex;align-items:baseline;gap:14px;margin:60px 0 20px}
+.sec-head .num{font-family:"Space Grotesk";font-size:13px;color:var(--amber);border:1px solid var(--line2);padding:3px 9px;border-radius:8px}
+.sec-head h2{font-family:Lalezar;font-size:clamp(25px,3.4vw,38px);font-weight:400}
+.sec-head h2 i{font-style:normal;color:var(--teal)}
+.sec-head p{color:var(--mut);font-size:13px;margin-inline-start:auto;text-align:left}
+@media(max-width:640px){.sec-head p{display:none}}
+.panel{background:linear-gradient(165deg,var(--panel),var(--soft));border:1px solid var(--line);border-radius:18px;padding:22px;position:relative;overflow:hidden}
+.panel::after{content:'';position:absolute;inset:0 0 auto 0;height:1px;background:linear-gradient(90deg,transparent,rgba(233,244,244,.14),transparent)}
+.panel h3{font-family:Lalezar;font-size:20px;font-weight:400;margin-bottom:14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.panel h3 .dot{width:9px;height:9px;border-radius:50%;background:var(--teal);box-shadow:0 0 10px var(--teal);animation:pulse 2.4s infinite;flex-shrink:0}
+@keyframes pulse{50%{opacity:.35}}
+.sum-panel{display:flex;gap:28px;align-items:center;flex-wrap:wrap;border-color:var(--line2)}
+.sum-side{flex:1;min-width:290px}
+.sum-title{font-family:Lalezar;font-size:23px;margin-bottom:4px}
+.sum-sub{font-size:12px;color:var(--mut);margin-bottom:14px}
+.sum-tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media(max-width:640px){.sum-tiles{grid-template-columns:repeat(2,1fr)}}
+.stile{background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:12px 8px;text-align:center;transition:.3s}
+.stile:hover{transform:translateY(-3px);border-color:var(--line2)}
+.stile .v{font-family:Lalezar;font-size:29px;line-height:1.2}
+.stile .k{font-size:11px;color:var(--mut)}
+.s-total .v{color:var(--ink)}.s-learn .v{color:var(--green)}.s-hard .v{color:var(--coral)}.s-rest .v{color:var(--sky)}
+.sum-legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:14px;font-size:12px;color:var(--mut)}
+.sum-legend i{width:10px;height:10px;border-radius:3px;display:inline-block;margin-inline-end:5px;vertical-align:-1px}
+.sum-donut{text-align:center}
+.sum-note{font-size:11px;color:var(--mut);margin-top:6px}
+.cockpit{display:grid;gap:18px;grid-template-columns:1.05fr 1fr;grid-template-areas:"gauge battery" "gauge tiles" "levels levels" "chain chain"}
+@media(max-width:900px){.cockpit{grid-template-columns:1fr;grid-template-areas:"gauge" "battery" "tiles" "levels" "chain"}}
+.p-gauge{grid-area:gauge;text-align:center}.p-battery{grid-area:battery}
+.p-tiles{grid-area:tiles;display:grid;grid-template-columns:1fr 1fr;gap:14px;background:none;border:none;padding:0}
+.p-tiles::after{display:none}
+.p-levels{grid-area:levels}.p-chain{grid-area:chain}
+.gauge-wrap{position:relative;max-width:370px;margin:0 auto}
+.gauge-wrap svg{width:100%;height:auto;display:block}
+#gArcProg{transition:stroke-dasharray 1.4s cubic-bezier(.25,.8,.3,1)}
+#needleG{transform-origin:110px 120px;transition:transform 1.5s cubic-bezier(.2,.85,.3,1.08)}
+.g-read{position:absolute;inset:auto 0 6%;text-align:center}
+.g-read .big{font-family:Lalezar;font-size:50px;line-height:1;color:var(--amber);text-shadow:0 0 22px rgba(255,184,77,.45)}
+.g-read .lbl{font-size:12px;color:var(--mut)}
+.g-sub{margin-top:6px;font-size:13px;color:var(--mut)} .g-sub b{color:var(--teal)}
+.bat-wrap{position:relative;direction:ltr}
+.bat-wrap svg{width:100%;height:auto;display:block}
+#batFill{transition:width 1.2s cubic-bezier(.3,.8,.3,1)}
+.bat-shine{position:absolute;top:21.5%;left:4.7%;width:82.6%;height:57%;border-radius:11px;overflow:hidden;pointer-events:none;opacity:0;transition:.5s}
+body.charging .bat-shine{opacity:1}
+.bat-shine::before{content:'';position:absolute;inset:-40%;background:repeating-linear-gradient(45deg,rgba(255,255,255,.09) 0 12px,transparent 12px 26px);animation:batmove 1.1s linear infinite}
+@keyframes batmove{to{transform:translateX(37px)}}
+#bolt{opacity:.15;transition:.4s}
+body.charging #bolt{opacity:1;animation:boltblink 1s infinite}
+@keyframes boltblink{50%{opacity:.35}}
+.bat-info{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px;flex-wrap:wrap}
+.bat-info .st{font-size:13px;color:var(--mut)} body.charging .bat-info .st{color:var(--teal)}
+.bat-info .st .b{font-family:Lalezar;font-size:22px;color:var(--ink)}
+.tile{background:linear-gradient(165deg,var(--panel),var(--soft));border:1px solid var(--line);border-radius:16px;padding:15px 17px;display:flex;flex-direction:column;gap:4px;transition:.3s;overflow:hidden}
+.tile:hover{transform:translateY(-4px);border-color:var(--line2);box-shadow:0 14px 30px rgba(0,0,0,.35)}
+.tile .ic{font-size:19px}.tile .v{font-family:Lalezar;font-size:32px;line-height:1.1}
+.tile .k{font-size:12px;color:var(--mut)}
+.tile.t1 .v{color:var(--teal)}.tile.t2 .v{color:var(--amber)}.tile.t3 .v{color:var(--sky)}.tile.t4 .v{color:var(--gold)}
+.lvrow{display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px dashed var(--line)}
+.lvrow:last-child{border:none}
+.lv-badge{font-family:"Space Grotesk";font-weight:700;font-size:12.5px;padding:4px 11px;border-radius:8px;min-width:46px;text-align:center;color:var(--ink)}
+.bar{height:10px;background:var(--soft);border-radius:99px;overflow:hidden;border:1px solid var(--line);flex:1}
+.bar i{display:block;height:100%;border-radius:99px;width:0;transition:width 1.2s cubic-bezier(.3,.8,.3,1)}
+.lv-count{font-size:12.5px;color:var(--mut);min-width:74px;text-align:left;direction:ltr}
+.chain-top{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:12px}
+#streakChain{display:flex;gap:1px;flex-wrap:wrap;align-items:center;min-height:34px}
+.link{font-size:24px;animation:linkin .5s both;filter:drop-shadow(0 0 6px rgba(255,184,77,.55))}
+@keyframes linkin{from{opacity:0;transform:scale(.3) rotate(-40deg)}}
+.link.more{font-size:13px;color:var(--amber);font-weight:700;padding:0 6px}
+.chain-dim{color:var(--mut);font-size:13px}
+#heatmap{display:grid;grid-auto-flow:column;grid-template-rows:repeat(7,13px);grid-auto-columns:13px;gap:3px;direction:ltr;overflow-x:auto;padding:6px 2px}
+.hm{width:13px;height:13px;border-radius:3px;background:var(--panel2);border:1px solid var(--line);transition:.15s}
+.hm:hover{transform:scale(1.35)}
+.hm.l1{background:rgba(47,214,195,.5);border-color:transparent}
+.hm.l2{background:rgba(255,209,102,.8);border-color:transparent}
+.hm.l3{background:#ff7a6b;border-color:transparent}
+.hm.empty{background:transparent;border-color:transparent}
+.hm-legend{display:flex;gap:6px;align-items:center;font-size:11px;color:var(--mut);margin-top:8px;direction:ltr}
+.hm-legend .hm{display:inline-block}
+.lvhubs{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:16px}
+.lvhub{background:linear-gradient(165deg,var(--panel),var(--soft));border:1px solid var(--line);border-radius:18px;padding:20px;transition:.3s;animation:msgin .5s}
+.lvhub:hover{transform:translateY(-5px);box-shadow:0 18px 40px rgba(0,0,0,.4);border-color:var(--line2)}
+.lvh-head{display:flex;align-items:center;gap:12px}
+.lvh-name{font-family:Lalezar;font-size:20px}
+.lvh-sub{font-size:11.5px;color:var(--mut)}
+.lvh-pct{margin-inline-start:auto;font-family:Lalezar;font-size:28px}
+.lvh-stats{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--mut);margin:12px 0}
+.lvh-btns{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.lvb{cursor:pointer;border:1px solid var(--line2);background:var(--soft);color:var(--ink);font-family:Vazirmatn;font-size:12px;font-weight:600;padding:9px 6px;border-radius:10px;transition:.22s}
+.lvb:hover{border-color:var(--teal);color:var(--teal);transform:translateY(-2px)}
+.lvb.hot{background:rgba(255,184,77,.1);border-color:rgba(255,184,77,.5);color:var(--amber)}
+.lvb.hot:hover{background:rgba(255,184,77,.2)}
+.lvb.wide{grid-column:1/-1}
+/* داشبورد دایره‌ای سطح‌ها */
+.lv-donuts{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin-top:18px}
+.lvd{background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:14px;text-align:center;transition:.3s}
+.lvd:hover{transform:translateY(-4px);border-color:var(--line2)}
+.lvd canvas{display:block;margin:0 auto}
+.lvd-name{font-family:Lalezar;font-size:17px;margin-top:6px}
+.lvd-cnt{font-size:10.5px;color:var(--mut);margin-top:5px;line-height:1.9}
+.btn{cursor:pointer;border:none;font-family:Vazirmatn;font-weight:700;font-size:14px;border-radius:12px;padding:11px 20px;color:var(--ink);background:linear-gradient(160deg,var(--amber),var(--amber2));box-shadow:0 6px 18px rgba(255,152,56,.25);transition:.25s;display:inline-flex;align-items:center;gap:8px;justify-content:center}
+.btn:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(255,152,56,.4)}
+.btn:active{transform:scale(.97)}
+.btn.teal{background:linear-gradient(160deg,var(--teal),#1fae9e);box-shadow:0 6px 18px rgba(47,214,195,.22)}
+.btn.teal:hover{box-shadow:0 12px 26px rgba(47,214,195,.35)}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line2);box-shadow:none}
+.btn.ghost:hover{border-color:var(--teal);color:var(--teal)}
+.btn.sm{padding:7px 13px;font-size:12.5px;border-radius:10px}
+.icon-btn{cursor:pointer;width:42px;height:42px;border-radius:12px;border:1px solid var(--line2);background:var(--panel2);color:var(--ink);font-size:18px;transition:.25s;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.icon-btn:hover{border-color:var(--amber);color:var(--amber);transform:translateY(-2px)}
+.icon-btn.smi{width:34px;height:34px;font-size:14px;border-radius:10px}
+.icon-btn.rec{border-color:var(--coral);color:var(--coral);animation:pulse 1s infinite}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{cursor:pointer;font-size:12.5px;font-weight:600;padding:6px 14px;border-radius:999px;border:1px solid var(--line2);background:transparent;color:var(--mut);transition:.22s;font-family:Vazirmatn}
+.chip:hover{color:var(--ink);border-color:var(--teal)}
+.chip.on{background:var(--teal);border-color:var(--teal);color:var(--ink)}
+.chip.lv.on{background:var(--amber);border-color:var(--amber)}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-size:12.5px;color:var(--mut);font-weight:600}
+.field input,.field select,.field textarea,.chat-in input,#planSearch{font-family:Vazirmatn;background:var(--soft);border:1px solid var(--line2);border-radius:11px;color:var(--ink);padding:10px 13px;font-size:14px;outline:none;transition:.25s;width:100%}
+.field input:focus,.field select:focus,.field textarea:focus,#planSearch:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(47,214,195,.14)}
+.en-in{direction:ltr;font-family:"Space Grotesk"!important;text-align:left}
+.fld-select{background:var(--soft);border:1px solid var(--line2);border-radius:10px;color:var(--ink);padding:8px 11px;font-family:Vazirmatn;font-size:13px;outline:none}
+.filter-bar{display:flex;flex-direction:column;gap:12px;margin-bottom:22px}
+.filter-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.filter-row .lab{font-size:12px;color:var(--mut);min-width:52px}
+.deck-top{display:flex;align-items:center;gap:12px;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap}
+.deck-count{font-size:13px;color:var(--mut)} .deck-count b{color:var(--amber);font-family:Lalezar;font-size:18px}
+.deck-bar{height:6px;background:var(--soft);border-radius:99px;overflow:hidden;margin-bottom:26px;border:1px solid var(--line)}
+.deck-bar i{display:block;height:100%;background:linear-gradient(90deg,var(--teal),var(--amber));width:0;transition:width .5s}
+.fc-zone{max-width:600px;margin:0 auto;perspective:1400px}
+.fc{position:relative;width:100%;min-height:340px;transform-style:preserve-3d;transition:transform .7s cubic-bezier(.3,.7,.3,1);cursor:pointer}
+.fc.flip{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:22px;border:1px solid var(--line2);background:linear-gradient(170deg,var(--panel2),var(--panel2));padding:26px;display:flex;flex-direction:column;box-shadow:0 24px 60px rgba(0,0,0,.4)}
+.face.back{transform:rotateY(180deg);background:linear-gradient(170deg,var(--panel2),var(--soft))}
+.fc:hover .face{border-color:var(--amber)}
+.fc.fg .face{animation:flashG .8s;border-color:var(--green)}
+.fc.fr .face{animation:flashR .8s;border-color:var(--coral)}
+@keyframes flashG{0%{box-shadow:0 0 0 0 rgba(61,220,132,.75)}100%{box-shadow:0 0 0 30px rgba(61,220,132,0)}}
+@keyframes flashR{0%{box-shadow:0 0 0 0 rgba(255,122,107,.75)}100%{box-shadow:0 0 0 30px rgba(255,122,107,0)}}
+.fc-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.fc-img-zone{width:78px;height:78px;border-radius:13px;border:1.5px dashed var(--line2);overflow:hidden;cursor:pointer;display:flex;align-items:center;justify-content:center;background:var(--soft);transition:.25s;flex-shrink:0}
+.fc-img-zone:hover{border-color:var(--teal)}
+.fc-img-zone img{width:100%;height:100%;object-fit:cover}
+.fc-img-zone .ph{opacity:.5;font-size:21px}
+.fc-word{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;text-align:center}
+.fc-word .w{font-family:"Space Grotesk";font-size:clamp(32px,5.6vw,50px);font-weight:700;letter-spacing:-.5px;background:linear-gradient(120deg,#fff,var(--teal));-webkit-background-clip:text;background-clip:text;color:transparent}
+.fc-word .ipa{color:var(--mut);font-size:15px;font-family:"Space Grotesk";direction:ltr}
+.fc-word .fa{font-family:Lalezar;font-size:clamp(34px,5.6vw,52px);color:var(--gold)}
+.fc-word .ex{font-size:14px;color:var(--ink);direction:ltr;font-family:"Space Grotesk";max-width:92%;line-height:1.8}
+.fc-foot{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+.hint{position:absolute;bottom:7px;inset-inline:0;text-align:center;font-size:11px;color:var(--mut);opacity:.7}
+.tag{font-size:11px;padding:3px 10px;border-radius:99px;border:1px solid var(--line2);color:var(--mut)}
+.tag.star-on{color:var(--gold);border-color:var(--gold)}
+.pron-fb{min-height:20px;font-size:13px;text-align:center;margin-top:8px;font-weight:700}
+.fc-nav{display:flex;justify-content:center;gap:12px;margin-top:26px;flex-wrap:wrap}
+.st-badge{font-size:11px;font-weight:700;padding:3px 11px;border-radius:99px}
+.st-badge.g{background:rgba(61,220,132,.16);color:var(--green);border:1px solid rgba(61,220,132,.5)}
+.st-badge.r{background:rgba(255,122,107,.16);color:var(--coral);border:1px solid rgba(255,122,107,.5)}
+.st-badge.o{background:rgba(255,184,77,.14);color:var(--amber);border:1px solid rgba(255,184,77,.45)}
+#wbGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:13px}
+.wcard{background:var(--card);border:1.5px solid var(--line);border-radius:15px;overflow:hidden;display:flex;flex-direction:column;transition:.28s;animation:msgin .4s}
+.wcard:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(0,0,0,.35)}
+.wcard.st-learned{border-color:var(--green);background:linear-gradient(170deg,rgba(61,220,132,.1),var(--card) 60%)}
+.wcard.st-hard{border-color:var(--coral);background:linear-gradient(170deg,rgba(255,122,107,.12),var(--card) 60%)}
+.wimg{height:92px;background:var(--panel2);display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;position:relative;border-bottom:1px solid var(--line)}
+.wimg img{width:100%;height:100%;object-fit:cover;transition:.3s}
+.wcard:hover .wimg img{transform:scale(1.07)}
+.wimg .ph{font-size:25px;opacity:.45}
+.wimg::after{content:'📷 آپلود عکس';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(7,22,29,.78);color:var(--teal);font-size:12px;opacity:0;transition:.25s}
+.wimg:hover::after{opacity:1}
+.wtx{padding:11px 13px 4px;flex:1}
+.ww{font-family:"Space Grotesk";font-weight:700;font-size:19px}
+.wf{color:var(--gold);font-family:Lalezar;font-size:16px}
+.wm{font-size:11px;color:var(--mut);margin-top:2px}
+.wbts{display:flex;gap:6px;padding:10px 12px 13px;align-items:center}
+.wb{flex:1;cursor:pointer;border-radius:9px;padding:7px 3px;font-size:11.5px;font-weight:700;font-family:Vazirmatn;border:1px solid;transition:.22s;background:transparent}
+.wb.ok{color:var(--green);border-color:rgba(61,220,132,.45)} .wb.ok:hover{background:rgba(61,220,132,.16)}
+.wb.no{color:var(--coral);border-color:rgba(255,122,107,.45)} .wb.no:hover{background:rgba(255,122,107,.15)}
+.wcard.st-learned .wb.ok{background:rgba(61,220,132,.22)}
+.wcard.st-hard .wb.no{background:rgba(255,122,107,.22)}
+.hard-panel{border-color:rgba(255,122,107,.45)}
+.hard-panel::after{background:linear-gradient(90deg,transparent,rgba(255,122,107,.4),transparent)}
+.hard-badge{font-family:Lalezar;font-size:17px;background:rgba(255,122,107,.16);color:var(--coral);border:1px solid rgba(255,122,107,.5);padding:2px 14px;border-radius:99px}
+#hardGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.hcard{background:rgba(255,122,107,.07);border:1.5px solid rgba(255,122,107,.5);border-radius:14px;padding:13px;animation:msgin .4s;transition:.25s}
+.hcard:hover{transform:translateY(-3px);box-shadow:0 12px 26px rgba(255,122,107,.14)}
+#hardEmpty{color:var(--mut);font-size:13.5px;text-align:center;padding:22px 0}
+.rep-badge{font-family:Lalezar;font-size:17px;background:rgba(255,184,77,.14);color:var(--amber);border:1px solid rgba(255,184,77,.5);padding:2px 14px;border-radius:99px}
+.rep-stages{display:grid;grid-template-columns:repeat(6,1fr);gap:9px;margin:16px 0}
+@media(max-width:640px){.rep-stages{grid-template-columns:repeat(3,1fr)}}
+.stg{background:var(--soft);border:1px solid var(--line);border-radius:13px;padding:12px 6px;text-align:center;transition:.3s}
+.stg:hover{transform:translateY(-3px);border-color:var(--line2)}
+.stg-n{font-family:Lalezar;font-size:26px;color:var(--teal)}
+.stg-k{font-size:11px;color:var(--ink);font-weight:700}
+.stg-d{font-size:10.5px;color:var(--mut)}
+.stg.grad .stg-n{color:var(--gold)}
+.rep-card{max-width:560px;margin:18px auto 0;background:linear-gradient(170deg,var(--panel2),var(--panel2));border:1px solid var(--line2);border-radius:20px;padding:30px;text-align:center;animation:msgin .4s}
+.rep-word{font-family:"Space Grotesk";font-size:clamp(32px,5vw,46px);font-weight:700;direction:ltr}
+.rep-ipa{color:var(--mut);font-family:"Space Grotesk";direction:ltr;margin-top:4px}
+.rep-ans{display:none;margin-top:18px;border-top:1px dashed var(--line2);padding-top:16px}
+.rep-ans.show{display:block;animation:msgin .35s}
+.rep-ans .fa{font-family:Lalezar;font-size:34px;color:var(--gold)}
+.rep-ans .ex{font-size:13.5px;color:var(--mut);direction:ltr;font-family:"Space Grotesk";margin-top:6px}
+.rep-stage-info{font-size:12px;color:var(--amber);margin-top:10px}
+.rep-btns{display:flex;gap:12px;justify-content:center;margin-top:20px;flex-wrap:wrap}
+.plan-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:860px){.plan-grid{grid-template-columns:1fr}}
+.plan-add-row{display:flex;gap:10px;margin:12px 0}
+.plan-bulk{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
+.plan-bulk select,.plan-bulk input[type=number]{background:var(--soft);border:1px solid var(--line2);border-radius:10px;color:var(--ink);padding:8px 11px;font-family:Vazirmatn;font-size:13px}
+.pchip{display:inline-flex;align-items:center;gap:7px}
+.pchip b{cursor:pointer;color:var(--coral)}
+#planMeta{font-size:12px;color:var(--teal);margin-top:10px}
+.plan-week-row{display:flex;align-items:center;gap:10px;padding:10px 13px;border:1px solid var(--line);border-radius:11px;margin-bottom:8px;cursor:pointer;transition:.22s;background:var(--soft);font-size:13px}
+.plan-week-row:hover{border-color:var(--teal);transform:translateX(-3px)}
+.plan-week-row.today{border-color:var(--gold);background:rgba(255,209,102,.06)}
+#todayPlan{margin-top:16px;border:1px dashed var(--line2);border-radius:13px;padding:15px;background:var(--soft)}
+.quiz-grid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr 1fr;gap:14px}
+@media(max-width:900px){.quiz-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.quiz-grid{grid-template-columns:1fr}}
+#quizRun,#quizDone{display:none}
+.q-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;font-size:13px;color:var(--mut)}
+.q-head b{color:var(--amber);font-family:Lalezar;font-size:18px}
+.q-time{height:6px;background:var(--soft);border-radius:99px;overflow:hidden;margin-bottom:22px;border:1px solid var(--line)}
+.q-time i{display:block;height:100%;width:100%;background:linear-gradient(90deg,var(--coral),var(--gold));transition:width linear}
+.q-word{font-family:"Space Grotesk";font-size:clamp(30px,5vw,44px);font-weight:700;text-align:center;direction:ltr;margin:8px 0 6px}
+.q-word.fa-q{font-family:Lalezar;direction:rtl;color:var(--gold)}
+.q-sub{text-align:center;font-size:12.5px;color:var(--mut);margin-bottom:22px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:560px){.opts{grid-template-columns:1fr}}
+.opt{cursor:pointer;padding:15px 16px;border-radius:14px;border:1px solid var(--line2);background:var(--panel2);font-size:15px;font-weight:600;color:var(--ink);transition:.22s;text-align:center;font-family:Vazirmatn}
+.opt:hover:not(:disabled){border-color:var(--sky);transform:translateY(-3px)}
+.opt.ok{background:rgba(47,214,195,.16);border-color:var(--teal);color:var(--teal)}
+.opt.bad{background:rgba(255,122,107,.14);border-color:var(--coral);color:var(--coral);animation:shake .4s}
+@keyframes shake{25%{transform:translateX(6px)}50%{transform:translateX(-6px)}75%{transform:translateX(4px)}}
+.res-ring{display:block;margin:6px auto 10px}
+#resRingFg{transition:stroke-dasharray 1.4s cubic-bezier(.3,.8,.3,1)}
+.res-score{text-align:center;font-family:Lalezar;font-size:26px}
+.res-xp{text-align:center;color:var(--gold);font-size:14px;margin:6px 0 16px}
+.miss-list{display:flex;flex-direction:column;gap:8px;margin:14px 0;max-height:220px;overflow:auto}
+.miss{display:flex;justify-content:space-between;gap:10px;font-size:13.5px;background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:9px 13px;align-items:center}
+.miss .e{direction:ltr;font-family:"Space Grotesk";color:var(--sky)} .miss .f{color:var(--gold)}
+.acc{border:1px solid var(--line);border-radius:14px;margin-bottom:12px;overflow:hidden;background:var(--panel);transition:.3s}
+.acc:hover{border-color:var(--line2)}
+.acc-h{display:flex;align-items:center;gap:12px;padding:15px 18px;cursor:pointer}
+.acc-h .tt{font-family:Lalezar;font-size:19px}
+.acc-h .ar{margin-inline-start:auto;transition:.35s;color:var(--mut)}
+.acc.open .acc-h .ar{transform:rotate(180deg);color:var(--teal)}
+.acc-b{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.3,.8,.3,1)}
+.acc-b-in{padding:4px 18px 18px;color:var(--mut);font-size:14px;line-height:2}
+.g-ex{display:flex;align-items:center;gap:10px;background:var(--soft);border-radius:10px;padding:9px 13px;margin-top:8px;border:1px solid var(--line)}
+.g-ex .e{direction:ltr;font-family:"Space Grotesk";font-size:14px}
+.g-ex .f{color:var(--mut);font-size:12.5px;margin-inline-start:auto}
+.g-vid{display:block;background:var(--soft);border:1px solid var(--line2);border-radius:14px;padding:12px;margin-top:12px}
+.g-vid video{width:100%;border-radius:10px;margin-top:8px;background:#000}
+.stats-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:18px}
+@media(max-width:860px){.stats-grid{grid-template-columns:1fr}}
+canvas{display:block;width:100%}
+.donut-wrap{display:flex;align-items:center;gap:18px;flex-wrap:wrap;justify-content:center}
+.legend{display:flex;flex-direction:column;gap:9px;font-size:13px}
+.legend i{width:11px;height:11px;border-radius:3px;display:inline-block;margin-inline-end:7px;vertical-align:-1px}
+.add-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:18px}
+@media(max-width:860px){.add-grid{grid-template-columns:1fr}}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.form-grid .full{grid-column:1/-1}
+@media(max-width:520px){.form-grid{grid-template-columns:1fr}}
+.drop{border:2px dashed var(--line2);border-radius:16px;padding:26px 18px;text-align:center;color:var(--mut);font-size:13.5px;transition:.3s;cursor:pointer;background:var(--soft)}
+.drop:hover,.drop.over{border-color:var(--teal);color:var(--teal);background:rgba(47,214,195,.05)}
+.drop .big{font-size:32px;display:block;margin-bottom:8px}
+.fmt-chips{display:flex;gap:6px;justify-content:center;margin-top:12px;flex-wrap:wrap}
+.fmt{font-family:"Space Grotesk";font-size:10.5px;border:1px solid var(--line2);border-radius:6px;padding:3px 8px;color:var(--mut)}
+.fmt.hl{color:var(--teal);border-color:rgba(47,214,195,.5)}
+#folderBox.connected{border-color:var(--teal)}
+#folderBox.connected::after{background:linear-gradient(90deg,transparent,rgba(47,214,195,.5),transparent)}
+#folderName{font-size:13.5px;color:var(--mut);margin:10px 0;padding:10px 13px;background:var(--soft);border-radius:10px;border:1px dashed var(--line2)}
+#folderLast{font-size:11.5px;color:var(--teal);margin-top:8px}
+.fld-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:10px}
+.fld-check{display:flex;align-items:center;gap:7px;font-size:12.5px;color:var(--mut);cursor:pointer}
+.fld-check input{accent-color:var(--teal);width:16px;height:16px}
+.bulk-grid{display:grid;grid-template-columns:1fr 240px;gap:16px}
+@media(max-width:700px){.bulk-grid{grid-template-columns:1fr}}
+#bulkBox{border-color:rgba(239,106,165,.35)}
+#bulkBox::after{background:linear-gradient(90deg,transparent,rgba(239,106,165,.4),transparent)}
+.bulk-hint{font-size:11.5px;color:var(--mut);line-height:2}
+#bulkCount{color:var(--amber);font-weight:700}
+#chatFab{position:fixed;bottom:22px;left:22px;z-index:90;width:60px;height:60px;border-radius:50%;border:none;cursor:pointer;background:linear-gradient(150deg,var(--teal),#1fae9e);color:var(--ink);font-size:26px;box-shadow:0 10px 30px rgba(47,214,195,.4);transition:.3s}
+#chatFab::before{content:'';position:absolute;inset:-6px;border-radius:50%;border:2px solid rgba(47,214,195,.5);animation:ring 2s infinite}
+@keyframes ring{to{transform:scale(1.35);opacity:0}}
+#chatFab:hover{transform:scale(1.08) rotate(-6deg)}
+#chatPanel{position:fixed;bottom:94px;left:22px;z-index:91;width:min(370px,calc(100vw - 40px));height:520px;background:linear-gradient(175deg,var(--panel),var(--soft));border:1px solid var(--line2);border-radius:20px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.55);opacity:0;pointer-events:none;transform:translateY(24px) scale(.96);transition:.35s cubic-bezier(.3,.8,.3,1)}
+#chatPanel.open{opacity:1;pointer-events:auto;transform:none}
+.chat-h{display:flex;align-items:center;gap:10px;padding:13px 16px;background:rgba(47,214,195,.08);border-bottom:1px solid var(--line)}
+.chat-h .av{width:38px;height:38px;border-radius:12px;background:linear-gradient(150deg,var(--teal),var(--sky));display:flex;align-items:center;justify-content:center;font-size:20px}
+.chat-h .nm{font-family:Lalezar;font-size:18px}
+.chat-h .st2{font-size:11px;color:var(--green)} .chat-h .st2::before{content:'●';margin-inline-end:4px;animation:pulse 2s infinite}
+.chat-h .x{margin-inline-start:auto;cursor:pointer;background:none;border:none;color:var(--mut);font-size:20px}
+.chat-h .x:hover{color:var(--coral)}
+#chatBody{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px}
+.msg{max-width:86%;padding:10px 14px;border-radius:14px;font-size:13.5px;line-height:1.9;animation:msgin .35s}
+@keyframes msgin{from{opacity:0;transform:translateY(10px)}}
+.msg.bot{align-self:flex-start;background:var(--panel2);border:1px solid var(--line);border-start-start-radius:4px}
+.msg.user{align-self:flex-end;background:rgba(255,184,77,.13);border:1px solid rgba(255,184,77,.3);border-start-end-radius:4px}
+.msg .mw{font-family:"Space Grotesk";font-weight:700;color:var(--teal);direction:ltr;display:inline-block}
+.msg .mf{font-family:Lalezar;color:var(--gold);font-size:16px}
+.msg b{color:var(--amber)}
+.typing{display:inline-flex;gap:4px;padding:4px 2px}
+.typing i{width:7px;height:7px;border-radius:50%;background:var(--teal);animation:tp 1s infinite}
+.typing i:nth-child(2){animation-delay:.18s}.typing i:nth-child(3){animation-delay:.36s}
+@keyframes tp{40%{transform:translateY(-6px);opacity:.4}}
+.chat-q{display:flex;gap:7px;padding:9px 12px 3px;flex-wrap:wrap}
+.chat-q .chip{font-size:11px;padding:4px 11px}
+.chat-in{display:flex;gap:8px;padding:11px;border-top:1px solid var(--line)} .chat-in input{flex:1}
+#toasts{position:fixed;bottom:24px;right:50%;transform:translateX(50%);z-index:99;display:flex;flex-direction:column;gap:8px;align-items:center}
+.toast{background:var(--panel2);border:1px solid var(--teal);color:var(--ink);padding:11px 20px;border-radius:12px;font-size:13.5px;box-shadow:0 14px 34px rgba(0,0,0,.45);animation:tin .4s;max-width:90vw;text-align:center}
+.toast.err{border-color:var(--coral)}
+@keyframes tin{from{opacity:0;transform:translateY(16px)}}
+.reveal{opacity:0;transform:translateY(28px);transition:.8s cubic-bezier(.3,.8,.3,1)}
+.reveal.in{opacity:1;transform:none}
+footer{position:relative;z-index:1;text-align:center;color:var(--mut);font-size:12.5px;padding:28px 16px 40px;border-top:1px solid var(--line);margin-top:30px}
+footer b{color:var(--teal)}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+.profile-tools{display:flex;align-items:center;gap:7px;border:1px solid var(--line2);background:var(--panel);padding:5px 8px;border-radius:12px;font-size:12px;color:var(--mut)}
+.profile-tools select{background:var(--soft);color:var(--ink);border:1px solid var(--line2);border-radius:8px;padding:6px;font-family:Vazirmatn;max-width:145px}
+.session-form{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:12px;align-items:end}.session-notes{grid-column:span 2}
+.session-tools{display:flex;align-items:end;gap:9px;flex-wrap:wrap;margin-top:17px;padding-top:14px;border-top:1px dashed var(--line)}.goal-field{max-width:180px}
+.analytics-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:12px;margin:16px 0}
+.analytics-card{background:linear-gradient(160deg,var(--panel),var(--soft));border:1px solid var(--line2);border-radius:15px;padding:16px}.analytics-card strong{display:block;font-family:Lalezar;font-size:29px;color:var(--teal)}.analytics-card span{font-size:12px;color:var(--mut)}
+.analytics-two{display:grid;grid-template-columns:1fr 1fr;gap:15px}.weekly-bars{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;align-items:end;min-height:165px}.week-col{display:flex;flex-direction:column;align-items:center;justify-content:end;gap:6px;height:150px;font-size:10px;color:var(--mut)}.week-bar{width:min(28px,80%);min-height:3px;border-radius:8px 8px 2px 2px;background:linear-gradient(0deg,var(--teal),var(--amber));position:relative}.week-col b{font-size:10px;color:var(--ink)}
+.breakdown-row{display:grid;grid-template-columns:1fr auto;gap:8px;padding:9px 0;border-bottom:1px dashed var(--line);font-size:12px}.breakdown-row i{font-style:normal;color:var(--teal)}
+.session-row{display:grid;grid-template-columns:1.3fr .8fr .75fr .6fr 1.2fr auto;gap:10px;align-items:center;padding:11px 8px;border-bottom:1px solid var(--line);font-size:12px}.session-row.overdue{background:rgba(255,122,107,.08);border-radius:9px}.status-select{background:var(--soft);color:var(--ink);border:1px solid var(--line2);border-radius:8px;padding:5px;font-family:Vazirmatn}.muted-small{font-size:11px;color:var(--mut);font-family:Vazirmatn}
+@media(max-width:760px){.analytics-two{grid-template-columns:1fr}.session-row{grid-template-columns:1fr 1fr}.session-notes{grid-column:span 1}.profile-tools{order:5}}
+
+.theme-picker{display:flex;align-items:center;gap:6px;border:1px solid var(--line2);background:var(--panel);padding:5px 8px;border-radius:12px;font-size:12px;color:var(--mut);white-space:nowrap}
+.theme-picker select{font:inherit;color:var(--ink);background:var(--soft);border:1px solid var(--line2);border-radius:8px;padding:5px;cursor:pointer}
+@media(max-width:640px){.theme-picker{order:3}}
+</style>
+
+<style id="ielts-light-theme">
+:root{--bg:#f3f7fb;--panel:#fff;--panel2:#edf4f8;--line:#dce6ed;--line2:#bfced9;--ink:#183344;--mut:#637b89;--amber:#d88710;--amber2:#d97706;--teal:#078b80;--sky:#1684ba;--coral:#d85f50;--gold:#bb8200;--green:#198754;--pink:#bd4b7a}
+body{background:radial-gradient(900px 500px at 90% -10%,rgba(7,139,128,.09),transparent 60%),linear-gradient(135deg,#f8fbfd,#eef4f8);color:var(--ink)}
+body::before{opacity:.22} .topbar{background:rgba(255,255,255,.94);box-shadow:0 5px 22px rgba(25,57,76,.07)}
+.panel,.tile,.lvhub,.lvd{background:linear-gradient(160deg,#fff,#f7fafc);box-shadow:0 8px 24px rgba(29,62,82,.055)}
+.stile,.lvd,.api-side,.api-security{background:#f5f9fb}.bar{background:#e9f0f4}.lvb{background:#f5f9fb;color:var(--ink)}
+.pill{background:#fff}.pill.save{color:#087f74}.ticker{border-color:var(--line)}
+nav a:hover,nav a.on{background:#eaf3f7;color:#163b4e}.btn.ghost{color:var(--ink);background:#f7fafc}
+#floaters span{color:rgba(24,51,68,.035)} .hm{background:#eaf0f3;border-color:#dce6ed}.hm.l1{background:#89d7ce}.hm.l2{background:#f6cf75}.hm.l3{background:#ef9588}
+.api-layout{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(250px,.8fr);gap:16px}.api-panel h3,.api-side h3{margin:0}.api-title-row{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.api-intro{font-size:13px;color:var(--mut);margin:12px 0 18px}.api-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.api-wide{grid-column:1/-1}.api-field{display:flex;flex-direction:column;gap:7px;font-size:12px;font-weight:700}.api-field input{width:100%;border:1px solid var(--line2);background:#fbfdfe;color:var(--ink);border-radius:11px;padding:12px 13px;font:14px Vazirmatn,sans-serif;outline:none}.api-field input:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(7,139,128,.12)}.api-toggle{grid-column:1/-1;display:flex;align-items:center;gap:11px;cursor:pointer}.api-toggle input{position:absolute;opacity:0}.switch-ui{width:43px;height:24px;border-radius:99px;background:#cbd7dd;position:relative;transition:.2s;flex-shrink:0}.switch-ui:after{content:"";width:18px;height:18px;background:#fff;border-radius:50%;position:absolute;top:3px;right:3px;box-shadow:0 1px 4px #789;transition:.2s}.api-toggle input:checked+.switch-ui{background:var(--teal)}.api-toggle input:checked+.switch-ui:after{transform:translateX(-19px)}.api-toggle span:last-child{display:flex;flex-direction:column}.api-toggle small{font-size:11px;color:var(--mut);font-weight:400}.api-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:19px}.api-badge{border-radius:99px;padding:6px 11px;font-size:11px;font-weight:700;background:#edf1f4;color:#647782}.api-badge.ok{background:#e2f5eb;color:#177c4a}.api-badge.err{background:#fff0ed;color:#bd4337}.api-badge.busy{background:#fff5dc;color:#946300}.api-message{font-size:12px;color:var(--mut);margin-top:13px;min-height:20px}.api-security{border:1px solid var(--line);border-radius:11px;padding:11px;font-size:11px;color:var(--mut);line-height:1.9;margin-top:12px}.api-side p,.api-side small{font-size:12px;color:var(--mut);line-height:1.9}.api-side h3{margin-bottom:10px}.api-stat{display:flex;justify-content:space-between;gap:10px;padding:11px 0;border-bottom:1px dashed var(--line);font-size:12px}.api-stat b{overflow-wrap:anywhere}.api-side small{display:block;margin-top:12px}.api-side code,.api-intro code{direction:ltr;background:#eaf1f5;padding:2px 6px;border-radius:5px;color:#24556c}.api-side{align-self:start}
+@media(max-width:760px){.api-layout{grid-template-columns:1fr}.api-form-grid{grid-template-columns:1fr}.api-wide{grid-column:auto}.api-actions .btn{flex:1}}
+</style>
+
+<script>
+(()=>{const key='ielts-master-color-theme';const select=document.getElementById('themeSelect');if(!select)return;const apply=t=>{const valid=['sky','violet','mint','peach','pink'].includes(t)?t:'sky';document.documentElement.dataset.theme=valid;select.value=valid;try{localStorage.setItem(key,valid)}catch(e){}};let saved='sky';try{saved=localStorage.getItem(key)||'sky'}catch(e){}apply(saved);select.addEventListener('change',()=>apply(select.value));})();
+</script>
+</head>
+<body>
+<div id="floaters"></div>
+
+<header class="topbar">
+  <div class="logo">
+    <svg width="33" height="33" viewBox="0 0 34 34"><path d="M5 24a12 12 0 1 1 24 0" fill="none" stroke="#2fd6c3" stroke-width="3" stroke-linecap="round"/><line x1="17" y1="24" x2="24" y2="12" stroke="#ffb84d" stroke-width="3" stroke-linecap="round"/><circle cx="17" cy="24" r="3" fill="#ffb84d"/></svg>
+    <div>واژه‌سنج<small>داشبورد ۱۶٬۰۰۰ واژه</small></div>
+  </div>
+  <nav id="nav">
+    <a href="#dash" class="on">داشبورد</a><a href="#levels">سطح‌ها</a><a href="#cards">فلش‌کارت</a>
+    <a href="#wordbox">باکس لغات</a><a href="#hardbox">دشوارها</a><a href="#repeat">تکرار</a>
+    <a href="#planner">برنامه‌ریز</a><a href="#quiz">آزمون</a><a href="#grammar">گرامر</a>
+    <a href="#stats">آمار</a><a href="#analytics">تحلیل و زمان‌بندی</a><a href="#add">افزودن</a><a href="#api-box">تنظیمات API</a>
+  </nav>
+  <label class="theme-picker" for="themeSelect">🎨 تم <select id="themeSelect" aria-label="انتخاب تم رنگی"><option value="sky">آبی آسمانی</option><option value="violet">بنفش</option><option value="mint">سبز نعنایی</option><option value="peach">هلویی</option><option value="pink">صورتی</option></select></label>
+  <div class="pills">
+    <button class="pill save" id="saveBtn" title="ذخیرهٔ دستی — خودکار هر ۳۰ ثانیه">💾 ذخیره <span id="saveTime"></span></button>
+    <span class="pill xp">⚡ <span id="xpVal">۰</span> XP</span>
+    <span class="pill streak">🔥 <span id="streakVal">۰</span> روز</span>
+  </div>
+  <div class="profile-tools"><label for="profileSelect">👤 پروفایل</label><select id="profileSelect" aria-label="انتخاب پروفایل"></select><button class="btn ghost sm" id="profileManage">مدیریت کاربران</button></div>
+  <div class="ticker">واژهٔ تصادفی: <span class="tk" id="tickerTx"></span></div>
+</header>
+
+<main>
+<section id="summary">
+  <div class="panel sum-panel reveal">
+    <div class="sum-side">
+      <div class="sum-title">📊 شمارش کامل لغات</div>
+      <div class="sum-sub">طیف سرد ❄️ تا گرم 🔥 · حذف خودکار تکراری‌ها 🧹</div>
+      <div class="sum-tiles">
+        <div class="stile s-total"><div class="v" id="sumTotal">۰</div><div class="k">کل لغات (بدون تکرار)</div></div>
+        <div class="stile s-learn"><div class="v" id="sumLearn">۰</div><div class="k">✅ یادگرفتم</div></div>
+        <div class="stile s-hard"><div class="v" id="sumHard">۰</div><div class="k">❌ یادنگرفتم (دشوار)</div></div>
+        <div class="stile s-rest"><div class="v" id="sumRest">۰</div><div class="k">⏳ مانده</div></div>
+      </div>
+      <div class="sum-legend" id="sumLegend"></div>
+    </div>
+    <div class="sum-donut">
+      <canvas id="sumDonut" width="210" height="210" style="width:210px;max-width:210px"></canvas>
+      <div class="sum-note">درصد پیشرفت کلی در مرکز نمودار</div>
+    </div>
+  </div>
+</section>
+
+<section id="dash">
+  <div class="sec-head reveal"><span class="num">01</span><h2>کابین <i>خلبان</i></h2><p>کیلومترشمار، باتری روزانه و زنجیرهٔ یادگیری</p></div>
+  <div class="cockpit">
+    <div class="panel p-gauge reveal">
+      <h3><span class="dot"></span>کیلومترشمار پیشرفت</h3>
+      <div class="gauge-wrap">
+        <svg viewBox="0 0 220 200">
+          <defs><linearGradient id="gGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#2fd6c3"/><stop offset=".55" stop-color="#ffd166"/><stop offset="1" stop-color="#ff9838"/></linearGradient></defs>
+          <path d="M 33.8 164 A 88 88 0 1 1 186.2 164" fill="none" stroke="#132e3b" stroke-width="14" stroke-linecap="round"/>
+          <path id="gArcProg" d="M 33.8 164 A 88 88 0 1 1 186.2 164" fill="none" stroke="url(#gGrad)" stroke-width="14" stroke-linecap="round" pathLength="100" stroke-dasharray="0 100"/>
+          <g id="gTicks"></g><g id="gNums"></g>
+          <g id="needleG"><polygon points="106.5,126 110,48 113.5,126" fill="#ffb84d"/><polygon points="108,126 110,140 112,126" fill="#ff9838"/></g>
+          <circle cx="110" cy="120" r="11" fill="#0f2833" stroke="#ffb84d" stroke-width="3"/>
+        </svg>
+        <div class="g-read"><div class="big" id="gPct">۰٪</div><div class="lbl">درصد تسلط بر بانک واژه</div></div>
+      </div>
+      <div class="g-sub">وضعیت موتور یادگیری: <b id="gEngine">در حال گرم‌شدن…</b></div>
+    </div>
+    <div class="panel p-battery reveal">
+      <h3><span class="dot" style="background:var(--gold);box-shadow:0 0 10px var(--gold)"></span>باتری شارژ روزانه</h3>
+      <div class="bat-wrap">
+        <svg viewBox="0 0 300 120">
+          <defs><linearGradient id="batGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#2fd6c3"/><stop offset="1" stop-color="#7ee0a3"/></linearGradient></defs>
+          <rect x="8" y="20" width="262" height="80" rx="17" fill="#0a1d26" stroke="#2a5163" stroke-width="4"/>
+          <rect x="274" y="45" width="17" height="30" rx="6" fill="#2a5163"/>
+          <clipPath id="batclip"><rect x="14" y="26" width="250" height="68" rx="12"/></clipPath>
+          <g clip-path="url(#batclip)"><rect id="batFill" x="14" y="26" height="68" width="0" fill="url(#batGrad)"/></g>
+          <path id="bolt" d="M146 34 L128 64 h13 L134 86 L158 54 h-14 z" fill="#ffd166" stroke="#0a1d26" stroke-width="2"/>
+        </svg>
+        <div class="bat-shine"></div>
+      </div>
+      <div class="bat-info">
+        <div class="st"><span class="b" id="batPct">۰٪</span><br><span id="batTx">۰ از ۲۰ واژه امروز</span></div>
+        <div class="st" id="batStatus">خاموش</div>
+        <button class="btn ghost sm" id="goalBtn">🎯 هدف: ۲۰</button>
+      </div>
+    </div>
+    <div class="p-tiles">
+      <div class="tile t1 reveal"><span class="ic">📖</span><span class="v" id="tileKnown">۰</span><span class="k">واژهٔ یادگرفته</span></div>
+      <div class="tile t2 reveal"><span class="ic">🧱</span><span class="v" id="tileHard">۰</span><span class="k">واژهٔ دشوار</span></div>
+      <div class="tile t3 reveal"><span class="ic">🔁</span><span class="v" id="tileDue">۰</span><span class="k">تکرار امروز</span></div>
+      <div class="tile t4 reveal"><span class="ic">🎯</span><span class="v" id="tileAcc">—</span><span class="k">میانگین دقت آزمون</span></div>
+    </div>
+    <div class="panel p-levels reveal">
+      <h3><span class="dot" style="background:var(--sky);box-shadow:0 0 10px var(--sky)"></span>پیشرفت به تفکیک سطح</h3>
+      <div id="levelBars"></div>
+    </div>
+    <div class="panel p-chain reveal">
+      <h3><span class="dot" style="background:var(--amber);box-shadow:0 0 10px var(--amber)"></span>زنجیرهٔ یادگیری 🔗</h3>
+      <div class="chain-top"><div id="chainInfo" style="font-size:13px;color:var(--gold);font-weight:700"></div><div id="streakChain"></div></div>
+      <div id="heatmap"></div>
+      <div class="hm-legend">کم <span class="hm"></span><span class="hm l1"></span><span class="hm l2"></span><span class="hm l3"></span> زیاد — ۱۲ هفتهٔ اخیر</div>
+    </div>
+  </div>
+</section>
+
+<section id="levels">
+  <div class="sec-head reveal"><span class="num">02</span><h2>سطح‌ها + <i>داشبورد مدیریتی دایره‌ای</i></h2><p>نمودار دایره‌ای ۴رنگ (سرد→گرم) برای هر سطح + افزودن سطح جدید</p></div>
+  <div style="margin-bottom:14px" class="reveal">
+    <button class="btn sm" id="btnAddLvToggle">➕ افزودن سطح جدید</button>
+  </div>
+  <div id="addLvForm" class="filter-row reveal" style="display:none;margin-bottom:16px">
+    <input id="newLvName" placeholder="نام سطح جدید (مثلاً IELTS یا A1+)" style="max-width:230px;background:#0a1d26;border:1px solid var(--line2);border-radius:11px;padding:9px 13px;color:var(--ink);font-family:Vazirmatn;outline:none">
+    <input type="color" id="newLvColor" value="#ef6aa5" style="width:46px;height:40px;border:1px solid var(--line2);border-radius:10px;background:#0a1d26;cursor:pointer" title="رنگ سطح">
+    <button class="btn teal sm" id="btnAddLvSave">➕ ثبت سطح</button>
+    <button class="btn ghost sm" id="btnAddLvCancel">انصراف</button>
+  </div>
+  <div class="lvhubs reveal" id="lvHubs"></div>
+  <div class="panel reveal" style="margin-top:18px">
+    <h3><span class="dot" style="background:var(--pink);box-shadow:0 0 10px var(--pink)"></span>🧭 داشبورد مدیریتی دایره‌ای هر سطح (۴ رنگ سرد→گرم)</h3>
+    <div class="lv-donuts" id="lvDonuts"></div>
+  </div>
+</section>
+
+<section id="cards">
+  <div class="sec-head reveal"><span class="num">03</span><h2>فلش‌کارت <i>صوتی</i></h2><p>تلفظ، میکروفون، عکس واژه و فیلتر سطح و موضوع</p></div>
+  <div class="panel filter-bar reveal">
+    <div class="filter-row"><span class="lab">سطح:</span><div class="chips" id="lvChips"></div></div>
+    <div class="filter-row"><span class="lab">موضوع:</span><div class="chips" id="tpChips"></div></div>
+    <div class="filter-row">
+      <span class="lab">جستجو:</span>
+      <input id="qSearch" placeholder="جستجوی واژه یا معنی…" style="flex:1;min-width:180px;background:#0a1d26;border:1px solid var(--line2);border-radius:11px;padding:9px 13px;color:var(--ink);font-family:Vazirmatn;outline:none">
+      <label class="chip" id="starFlt" style="cursor:pointer">⭐ نشان‌شده‌ها</label>
+      <button class="btn ghost sm" id="resetFlt">پاک‌کردن فیلترها</button>
+    </div>
+  </div>
+  <div class="deck-top reveal">
+    <div class="deck-count">کارت <b id="fcIdx">۱</b> از <b id="fcTotal">۰</b> · یادگرفته: <b id="fcKnown">۰</b></div>
+    <div style="display:flex;gap:8px;align-items:center">
+      <button class="chip on" id="planChip" style="display:none">📅 حالت برنامه — خروج ✕</button>
+      <button class="btn ghost sm" id="btnShuffle">🔀 درهم</button>
+    </div>
+  </div>
+  <div class="deck-bar reveal"><i id="fcBar"></i></div>
+  <div class="fc-zone reveal">
+    <div class="fc" id="fcBox">
+      <div class="face front">
+        <div class="fc-top">
+          <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap"><span class="tag" id="fcLv">A1</span><span id="fcSt"></span></div>
+          <div style="display:flex;gap:7px;align-items:center">
+            <span class="tag" id="fcStar" style="cursor:pointer">☆ نشان</span>
+            <div class="fc-img-zone" id="fcImgZone" title="آپلود عکس واژه"><span class="ph">📷</span></div>
+          </div>
+        </div>
+        <div class="fc-word"><div class="w" id="fcWord" dir="ltr">—</div><div class="ipa" id="fcIpa"></div></div>
+        <div class="fc-foot">
+          <button class="icon-btn" id="fcSpeak" title="پخش تلفظ">🔊</button>
+          <button class="icon-btn" id="fcMic" title="تمرین گفتار">🎤</button>
+        </div>
+        <div class="pron-fb" id="pronFb"></div>
+        <div class="hint">برای دیدن معنی روی کارت کلیک کنید ↻</div>
+      </div>
+      <div class="face back">
+        <div class="fc-top"><span class="tag" id="fcTp2">—</span><span class="tag" id="fcLv2">A1</span></div>
+        <div class="fc-word"><div class="fa" id="fcFa">—</div><div class="ex" id="fcEx"></div></div>
+        <div class="fc-foot">
+          <button class="icon-btn" id="fcExSpeak" title="پخش مثال">🔊</button>
+          <button class="btn teal sm" id="btnLearned">✅ یادگرفتم</button>
+          <button class="btn sm" id="btnNot" style="background:linear-gradient(160deg,var(--coral),#e2584c);color:#fff;box-shadow:0 6px 18px rgba(255,122,107,.25)">❌ یادنگرفتم</button>
+        </div>
+        <div class="hint">یادگرفتم = سبز + ورود به چرخهٔ تکرار 🔁 · یادنگرفتم = قرمز و انتقال به دشوارها</div>
+      </div>
+    </div>
+    <div class="fc-nav">
+      <button class="btn ghost" id="btnPrev">→ قبلی</button>
+      <button class="btn" id="btnNext">بعدی ←</button>
+    </div>
+  </div>
+</section>
+
+<section id="wordbox">
+  <div class="sec-head reveal"><span class="num">04</span><h2>باکس <i>لغات</i></h2><p>سبز = یادگرفته · قرمز = دشوار · بدون تکراری 🧹</p></div>
+  <div class="panel reveal">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:8px">
+      <label for="wbSearch" style="display:flex;align-items:center;gap:8px;flex:1;min-width:220px;max-width:420px"><span style="color:var(--mut);font-size:13px">جستجوی واژه</span><input id="wbSearch" type="search" placeholder="جستجو در باکس لغات..." autocomplete="off" aria-label="جستجو در باکس لغات" style="flex:1;min-width:0"></label>
+      <span style="font-size:13px;color:var(--mut)">نمایش: <b id="wbCount" style="color:var(--teal)">۰ واژه</b></span>
+      <span style="font-size:12px;color:var(--mut)">📷 برای آپلود عکس روی کادر بالای هر کارت کلیک کنید</span><button class="btn teal sm" id="directWordAdd">➕ افزودن مستقیم واژه</button>
+    </div>
+    <div id="wbGrid"></div>
+    <div style="text-align:center;margin-top:18px"><button class="btn ghost" id="wbMore">نمایش بیشتر ⌄</button></div>
+  </div>
+</section>
+
+<section id="hardbox">
+  <div class="sec-head reveal"><span class="num">05</span><h2>لغات <i style="color:var(--coral)">دشوار</i></h2><p>قرمزها اینجا؛ که یاد گرفتید به جای خود برمی‌گردند</p></div>
+  <div class="panel hard-panel reveal">
+    <div class="filter-row" style="margin-bottom:14px"><span class="lab">سطح:</span><div class="chips" id="hardChips"></div></div>
+    <h3><span class="dot" style="background:var(--coral);box-shadow:0 0 10px var(--coral)"></span>🔴 لغات دشوار من <span class="hard-badge" id="hardCount">۰</span>
+      <span style="margin-inline-start:auto;display:flex;gap:8px">
+        <button class="btn sm" id="btnHardQuiz">📝 آزمون از دشوارها</button>
+        <button class="btn sm teal" id="btnHardCards">🃏 تمرین با فلش‌کارت</button>
+      </span>
+    </h3>
+    <div id="hardGrid"></div>
+    <div id="hardEmpty">هنوز واژهٔ دشواری ندارید 🎯</div>
+  </div>
+</section>
+
+<section id="repeat">
+  <div class="sec-head reveal"><span class="num">06</span><h2>تکرار <i>فاصله‌دار</i></h2><p>جعبهٔ لایتنر ۵ مرحله‌ای</p></div>
+  <div class="panel reveal" style="border-color:rgba(255,184,77,.35)">
+    <h3><span class="dot" style="background:var(--amber);box-shadow:0 0 10px var(--amber)"></span>🔁 تکرارهای امروز <span class="rep-badge" id="repDue">۰</span>
+      <span style="margin-inline-start:auto"><span class="chips" id="repChips"></span></span>
+    </h3>
+    <div class="rep-stages" id="repStages"></div>
+    <div id="repStartRow" style="text-align:center">
+      <button class="btn" id="btnStartRep">🚀 شروع مرور امروز</button>
+      <div style="font-size:12px;color:var(--mut);margin-top:10px">«یادم بود» = مرحلهٔ بعد · «یادم نبود» = برگشت به مرحلهٔ اول</div>
+    </div>
+    <div id="repRun" style="display:none">
+      <div class="rep-card">
+        <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--mut)">
+          <span id="repNum"></span><span class="st-badge o" id="repStg"></span>
+        </div>
+        <div class="rep-word" id="repWord">—</div>
+        <div class="rep-ipa" id="repIpa"></div>
+        <div style="margin-top:14px"><button class="icon-btn" id="repSpeak">🔊</button></div>
+        <div class="rep-ans" id="repAns">
+          <div class="fa" id="repFa"></div>
+          <div class="ex" id="repEx"></div>
+          <div class="rep-stage-info" id="repNext"></div>
+        </div>
+        <div class="rep-btns" id="repShowRow"><button class="btn teal" id="repShow">👁 نمایش پاسخ</button></div>
+        <div class="rep-btns" id="repAnsBtns" style="display:none">
+          <button class="btn teal" id="repOk">✅ یادم بود</button>
+          <button class="btn" id="repNo" style="background:linear-gradient(160deg,var(--coral),#e2584c);color:#fff">❌ یادم نبود</button>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:14px"><button class="btn ghost sm" id="repExit">✕ پایان مرور</button></div>
+    </div>
+    <div id="repDone" style="display:none;text-align:center;padding:20px 0">
+      <div style="font-size:40px">🎉</div>
+      <div style="font-family:Lalezar;font-size:24px;margin:6px 0">مرور امروز تمام شد!</div>
+      <div style="font-size:13px;color:var(--mut)" id="repDoneTx"></div>
+    </div>
+  </div>
+</section>
+
+<section id="analytics">
+  <div class="sec-head reveal"><span class="num">۱۲</span><h2>تحلیل <i>یادگیری و زمان‌بندی</i></h2><p>جلسه‌های دستی با تاریخ و ساعت، پایش هدف و روند</p></div>
+  <div class="panel reveal">
+    <h3><span class="dot"></span>📅 برنامه‌ریز جلسهٔ مطالعه</h3>
+    <form id="sessionForm" class="session-form">
+      <div class="field"><label for="sessionDate">تاریخ</label><input id="sessionDate" type="date" required></div>
+      <div class="field"><label for="sessionTime">زمان</label><input id="sessionTime" type="time" required></div>
+      <div class="field"><label for="sessionType">نوع فعالیت</label><select id="sessionType"><option>مطالعه لغات</option><option>مرور</option><option>آزمون</option><option>گرامر</option><option>استراحت</option></select></div>
+      <div class="field"><label for="sessionDuration">مدت (دقیقه)</label><input id="sessionDuration" type="number" min="1" max="1440" value="30" required></div>
+      <div class="field"><label for="sessionStatus">وضعیت</label><select id="sessionStatus"><option value="planned">برنامه‌ریزی‌شده</option><option value="done">انجام‌شده</option><option value="skipped">ردشده</option></select></div>
+      <div class="field session-notes"><label for="sessionNotes">یادداشت</label><input id="sessionNotes" type="text" maxlength="300" placeholder="اختیاری"></div>
+      <button class="btn" type="submit">ثبت جلسه</button>
+    </form>
+    <div class="session-tools"><div class="field goal-field"><label for="dailyGoal">هدف روزانه (دقیقه)</label><input id="dailyGoal" type="number" min="1" max="1440"></div>
+      <button class="btn teal sm" id="saveGoal" type="button">ذخیره هدف</button><button class="btn ghost sm" id="exportSchedule" type="button">خروجی JSON</button>
+      <button class="btn ghost sm" id="importScheduleBtn" type="button">ورود JSON</button><input id="importScheduleFile" type="file" accept="application/json,.json" hidden></div>
+  </div>
+  <div class="analytics-grid" id="analyticsMetrics"></div>
+  <div class="analytics-two"><div class="panel"><h3>📊 فعالیت هفتگی (دقیقهٔ انجام‌شده)</h3><div id="weeklyActivity" class="weekly-bars"></div></div>
+    <div class="panel"><h3>🧩 تفکیک فعالیت‌ها</h3><div id="activityBreakdown" class="breakdown"></div></div></div>
+  <div class="panel reveal" style="margin-top:16px"><h3>🗓️ جلسه‌ها <span class="muted-small">(جلسه‌های موعدگذشته به‌صورت برجسته مشخص می‌شوند)</span></h3><div id="sessionList"></div></div>
+</section>
+<section id="planner">
+  <div class="sec-head reveal"><span class="num">07</span><h2>برنامه‌ریز <i>یادگیری</i></h2><p>کاملاً قابل تنظیم: تعداد واژه در روز، تعداد روزها، سطح + تولید خودکار</p></div>
+  <div class="plan-grid">
+    <div class="panel reveal">
+      <h3><span class="dot" style="background:var(--gold);box-shadow:0 0 10px var(--gold)"></span>⚙️ تنظیمات برنامه‌ریز</h3>
+      <div class="plan-bulk">
+        <label style="font-size:12.5px;color:var(--mut)">واژه در روز:</label>
+        <input type="number" id="cfgPer" min="1" max="500" value="10" style="width:76px">
+        <label style="font-size:12.5px;color:var(--mut)">تعداد روز:</label>
+        <select id="cfgDays"><option>3</option><option selected>7</option><option>14</option><option>30</option></select>
+        <label style="font-size:12.5px;color:var(--mut)">سطح:</label>
+        <select id="cfgLv"></select>
+      </div>
+      <div class="plan-bulk"><button class="btn sm" id="btnAutoPlan">⚙️ تولید خودکار برنامهٔ روزها</button>
+      <button class="btn ghost sm" id="btnClearPlan">🗑 پاک‌کردن برنامه‌ها</button></div>
+      <h3 style="margin-top:8px"><span class="dot" style="background:var(--gold)"></span>✍️ تنظیم دستی برنامهٔ روز</h3>
+      <div class="field"><label>تاریخ</label><input type="date" id="planDate"></div>
+      <div class="plan-add-row"><input id="planSearch" placeholder="نام واژه یا معنی را بنویسید و Enter بزنید…"></div>
+      <div class="plan-bulk">
+        <select id="plLv"></select><select id="plTp"></select>
+        <button class="btn ghost sm" id="planBulk">➕ افزودن ۵ واژهٔ تصادفی</button>
+      </div>
+      <div class="chips" id="planChips"></div>
+      <div style="margin-top:14px" class="field"><label>یادداشت روز</label><textarea id="planNote" rows="2" placeholder="مثلاً: مرور لغات سفر قبل از پرواز…"></textarea></div>
+      <div id="planMeta"></div>
+    </div>
+    <div class="panel reveal">
+      <h3><span class="dot" style="background:var(--sky);box-shadow:0 0 10px var(--sky)"></span>🗓 هفتهٔ پیشِ رو</h3>
+      <div id="planWeek"></div>
+      <div id="todayPlan"></div>
+    </div>
+  </div>
+</section>
+
+<section id="quiz">
+  <div class="sec-head reveal"><span class="num">08</span><h2>آزمون <i>چندگزینه‌ای + املا</i></h2><p>تعداد سؤال تا «نامحدود» · حالت املا (تایپی) با تلفظ صوتی</p></div>
+  <div class="panel reveal" id="quizSetup">
+    <h3><span class="dot" style="background:var(--coral);box-shadow:0 0 10px var(--coral)"></span>تنظیم آزمون</h3>
+    <div id="qPoolNote" style="display:none;font-size:13px;color:var(--coral);background:rgba(255,122,107,.1);border:1px solid rgba(255,122,107,.4);border-radius:10px;padding:9px 13px;margin-bottom:14px"></div>
+    <div class="quiz-grid">
+      <div class="field"><label>سطح</label><select id="qLv"></select></div>
+      <div class="field"><label>موضوع</label><select id="qTp"></select></div>
+      <div class="field"><label>تعداد سؤال</label><select id="qN"><option>5</option><option>10</option><option>20</option><option>50</option><option value="all">♾ نامحدود (همه)</option></select></div>
+      <div class="field"><label>نوع آزمون</label><select id="qType"><option value="mc">چندگزینه‌ای</option><option value="spell">املا (تایپی) 🎧</option><option value="both">ترکیبی (سؤال در میان)</option></select></div>
+      <div class="field"><label>جهت سؤال</label><select id="qDir"><option value="e2f">انگلیسی ← فارسی</option><option value="f2e">فارسی ← انگلیسی</option><option value="mix">ترکیبی</option></select></div>
+    </div>
+    <div style="margin-top:18px"><button class="btn" id="btnStartQuiz">🚀 شروع آزمون</button></div>
+  </div>
+  <div class="panel reveal" id="quizRun">
+    <div class="q-head"><span>سؤال <b id="qNum">۱</b> از <b id="qOf">۱</b></span><span>امتیاز: <b id="qScore">۰</b></span></div>
+    <div class="q-time"><i id="qBar"></i></div>
+    <div class="q-word" id="qWord">—</div>
+    <div class="q-sub" id="qSub">معنی درست را انتخاب کنید</div>
+    <div class="opts" id="qOpts"></div>
+    <div id="spellBox" style="display:none;max-width:440px;margin:0 auto">
+      <input id="spellIn" class="en-in" placeholder="املای انگلیسی واژه را تایپ کنید…" autocomplete="off" style="width:100%;background:#0a1d26;border:1px solid var(--line2);border-radius:12px;padding:13px 15px;color:var(--ink);font-size:16px;outline:none">
+      <div style="text-align:center;margin-top:12px;display:flex;gap:10px;justify-content:center">
+        <button class="btn teal" id="spellBtn">ثبت املا</button>
+        <button class="icon-btn" id="spellSpeak" title="شنیدن دوباره">🔊</button>
+      </div>
+      <div id="spellFb" class="pron-fb"></div>
+    </div>
+  </div>
+  <div class="panel reveal" id="quizDone">
+    <svg class="res-ring" width="150" height="150" viewBox="0 0 150 150">
+      <circle cx="75" cy="75" r="60" fill="none" stroke="#132e3b" stroke-width="13"/>
+      <circle id="resRingFg" cx="75" cy="75" r="60" fill="none" stroke="url(#gGrad)" stroke-width="13" stroke-linecap="round" transform="rotate(-90 75 75)" pathLength="100" stroke-dasharray="0 100"/>
+      <text x="75" y="86" text-anchor="middle" fill="#ffb84d" font-size="30" font-family="Lalezar" id="resRingTx">۰٪</text>
+    </svg>
+    <div class="res-score" id="resTx">—</div>
+    <div class="res-xp" id="resXp"></div>
+    <div class="miss-list" id="missList"></div>
+    <div style="text-align:center"><button class="btn teal" id="btnRetry">🔁 آزمون دوباره</button>
+    <button class="btn ghost" id="btnToCards">مرور با فلش‌کارت</button></div>
+  </div>
+</section>
+
+<section id="grammar">
+  <div class="sec-head reveal"><span class="num">09</span><h2>کارگاه <i>گرامر</i></h2><p>درس‌های آماده + آپلود متن و فیلم آموزشی شما</p></div>
+  <div id="gramList" class="reveal"></div>
+  <div class="panel reveal" style="margin-top:18px">
+    <h3><span class="dot" style="background:var(--green);box-shadow:0 0 10px var(--green)"></span>📤 آپلود متن و فیلم آموزشی</h3>
+    <div class="drop" id="gramDrop">
+      <span class="big">🎬</span>فایل درس را بکشید یا کلیک کنید — متن (<span dir="ltr">.txt .md</span>) یا فیلم (<span dir="ltr">.mp4 .webm .mov</span>)<br>
+      <small>خط اول متن = عنوان درس · فیلم‌ها در همین جلسه قابل پخش‌اند</small>
+    </div>
+    <input type="file" id="gramFile" accept=".txt,.md,.text,.mp4,.webm,.mov,.m4v" hidden>
+    <div class="plan-bulk" style="margin-top:14px">
+      <input id="gTitle" placeholder="عنوان درس دستی…" style="max-width:220px;background:#0a1d26;border:1px solid var(--line2);border-radius:10px;padding:8px 11px;color:var(--ink);font-family:Vazirmatn;outline:none">
+      <textarea id="gBody" rows="2" placeholder="متن درس…" style="flex:1;min-width:200px;background:#0a1d26;border:1px solid var(--line2);border-radius:10px;padding:8px 11px;color:var(--ink);font-family:Vazirmatn;outline:none;resize:vertical"></textarea>
+      <button class="btn teal sm" id="gAdd">➕ افزودن درس متنی</button>
+    </div>
+    <div id="gramCustom"></div>
+    <div id="gramVids"></div>
+  </div>
+</section>
+
+<section id="stats">
+  <div class="sec-head reveal"><span class="num">10</span><h2>آمار <i>پیشرفت</i></h2><p>هفت روز اخیر و وضعیت چهارگانه</p></div>
+  <div class="stats-grid">
+    <div class="panel reveal"><h3><span class="dot"></span>واژه‌های یادگرفته در ۷ روز اخیر</h3><canvas id="weeklyCv" height="240"></canvas></div>
+    <div class="panel reveal"><h3><span class="dot" style="background:var(--gold);box-shadow:0 0 10px var(--gold)"></span>وضعیت چهارگانه</h3>
+      <div class="donut-wrap">
+        <canvas id="donutCv" width="185" height="185" style="width:185px;max-width:185px"></canvas>
+        <div class="legend">
+          <div><i style="background:#5cc3ff"></i>مانده: <b id="lgRest">۰</b></div>
+          <div><i style="background:#2fd6c3"></i>دیده‌شده: <b id="lgSeen">۰</b></div>
+          <div><i style="background:#ffd166"></i>دشوار: <b id="lgHard">۰</b></div>
+          <div><i style="background:#ff7a6b"></i>یادگرفتم: <b id="lgKnown">۰</b></div>
+        </div>
+      </div>
+    </div>
+    <div class="panel reveal" style="grid-column:1/-1"><h3><span class="dot" style="background:var(--pink);box-shadow:0 0 10px var(--pink)"></span>پوشش موضوعی</h3><div id="topicBars"></div></div>
+  </div>
+</section>
+
+<section id="add">
+  <div class="sec-head reveal"><span class="num">11</span><h2>افزودن واژه و <i>پوشهٔ ذخیره</i></h2><p>تکی، گروهی با انتخاب سطح، یا فایل در تمام فرمت‌ها</p></div>
+  <div class="panel reveal" id="bulkBox" style="margin-bottom:18px">
+    <h3><span class="dot" style="background:var(--pink);box-shadow:0 0 10px var(--pink)"></span>➕ افزودن گروهی لغات — با انتخاب سطح و موضوع</h3>
+    <div class="bulk-grid">
+      <div class="field">
+        <label>لیست واژه‌ها — هر خط یک واژه (<span id="bulkCount">۰ خط</span>)</label>
+        <textarea id="bulkText" rows="7" class="en-in" placeholder="apple, سیب&#10;brave شجاع&#10;serendipity"></textarea>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div class="field"><label>انتخاب سطح برای همه</label><select id="bulkLv"></select></div>
+        <div class="field"><label>انتخاب موضوع برای همه</label><select id="bulkTp"></select></div>
+        <label class="fld-check" style="font-size:12px"><input type="checkbox" id="bulkAutoLv" checked> اگر در خود خط سطح بود (A1–C2) همان را بخوان</label>
+        <button class="btn teal" id="btnBulkAdd">➕ افزودن گروهی</button>
+        <div class="bulk-hint">سطح انتخابی روی همه اعمال می‌شود · تکراری‌ها خودکار حذف 🧹</div>
+      </div>
+    </div>
+  </div>
+  <div class="add-grid">
+    <div class="panel reveal">
+      <h3><span class="dot"></span>ثبت واژهٔ جدید (تکی)</h3>
+      <form id="addForm" class="form-grid">
+        <div class="field"><label>واژهٔ انگلیسی *</label><input class="en-in" id="fW" required placeholder="serendipity"></div>
+        <div class="field"><label>معنی فارسی *</label><input id="fFa" required placeholder="خوش‌اقبالی"></div>
+        <div class="field"><label>سطح</label><select id="fLv"></select></div>
+        <div class="field"><label>موضوع</label><select id="fTp"></select></div>
+        <div class="field"><label>تلفظ (IPA)</label><input class="en-in" id="fIpa" placeholder="/ˌser.ənˈdɪp.ə.ti/"></div>
+        <div class="field"><label>عکس واژه 📷</label><input type="file" id="fImg" accept="image/*" style="padding:7px"></div>
+        <div class="field full"><label>جملهٔ مثال</label><input class="en-in" id="fEx" placeholder="Finding that book was pure serendipity."></div>
+        <img id="fImgPrev" style="max-width:100px;max-height:72px;border-radius:9px;display:none;grid-column:1/-1">
+        <div class="full"><button class="btn" type="submit">➕ افزودن به بانک واژه</button></div>
+      </form>
+    </div>
+    <div class="panel reveal">
+      <h3><span class="dot" style="background:var(--sky);box-shadow:0 0 10px var(--sky)"></span>📂 درون‌ریزی فایل — تمام فرمت‌ها</h3>
+      <div class="drop" id="dropZone">
+        <span class="big">📂</span>فایل واژگان را بکشید یا کلیک کنید<br>
+        <div class="fmt-chips">
+          <span class="fmt hl">XLSX</span><span class="fmt hl">XLS</span><span class="fmt hl">ODS</span>
+          <span class="fmt hl">PDF</span><span class="fmt hl">DOCX</span>
+          <span class="fmt">JSON</span><span class="fmt">CSV</span><span class="fmt">TSV</span><span class="fmt">TXT</span>
+          <span class="fmt">XML</span><span class="fmt">YAML</span>
+        </div>
+      </div>
+      <input type="file" id="fileIn" accept=".json,.csv,.tsv,.txt,.xlsx,.xls,.ods,.pdf,.docx,.doc,.xml,.yaml,.yml" hidden>
+      <div class="fld-row" style="margin-top:12px">
+        <label style="font-size:12.5px;color:var(--mut)">سطح واژه‌های فایل:</label>
+        <select id="impLv" class="fld-select"></select>
+      </div>
+      <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap">
+        <button class="btn teal sm" id="btnExpJson">⬇ خروجی JSON واژه‌های من</button>
+        <button class="btn ghost sm" id="btnDedupe">🧹 حذف تکراری‌ها</button>
+        <button class="btn ghost sm" id="btnTpl">📄 دانلود نمونهٔ قالب</button>
+        <button class="btn ghost sm" id="btnReset" style="border-color:var(--coral);color:var(--coral)">🗑 پاک‌کردن پیشرفت</button>
+      </div>
+      <p style="font-size:12px;color:var(--mut);margin-top:14px;line-height:2">💾 ذخیره خودکار <b style="color:var(--teal)">هر ۳۰ ثانیه</b></p>
+    </div>
+    <div class="panel reveal" id="folderBox" style="grid-column:1/-1">
+      <h3><span class="dot" style="background:var(--green);box-shadow:0 0 10px var(--green)"></span>📁 اتصال به پوشه برای ذخیرهٔ فایل‌ها</h3>
+      <div id="folderName">هنوز پوشه‌ای وصل نشده است.</div>
+      <div class="fld-row">
+        <button class="btn teal sm" id="btnFolder">📂 انتخاب پوشه</button>
+        <button class="btn sm" id="btnFolderSave">💾 ذخیرهٔ پشتیبان در پوشه</button>
+        <button class="btn ghost sm" id="btnFolderImgs">🖼 ذخیرهٔ عکس‌ها در پوشه</button>
+        <label class="fld-check"><input type="checkbox" id="autoFolder" checked> ذخیرهٔ خودکار در پوشه هر ۳۰ ثانیه</label>
+      </div>
+      <div id="folderLast"></div>
+    </div>
+  </div>
+</section>
+
+<section id="api-box">
+  <div class="sec-head reveal"><span class="num">API</span><h2>کباکس تنظیمات <i>API</i></h2><p>اتصال امن برنامه به سرویس پشتیبان شما</p></div>
+  <div class="api-layout">
+    <div class="panel api-panel">
+      <div class="api-title-row"><h3><span class="dot"></span>تنظیم اتصال و همگام‌سازی</h3><span id="apiStatus" class="api-badge idle" role="status" aria-live="polite">● غیرفعال</span></div>
+      <p class="api-intro">نشانی پایهٔ API را وارد کنید. آزمون اتصال به مسیر <code dir="ltr">/health</code> و همگام‌سازی به مسیر <code dir="ltr">/sync</code> درخواست می‌فرستد.</p>
+      <div class="api-form-grid">
+        <label class="api-field api-wide" for="apiBaseUrl">API Base URL <input id="apiBaseUrl" type="url" dir="ltr" placeholder="https://api.example.com" autocomplete="url"></label>
+        <label class="api-field api-wide" for="apiKey">API Key <input id="apiKey" type="password" dir="ltr" placeholder="کلید دسترسی (اختیاری)" autocomplete="new-password"></label>
+        <label class="api-toggle" for="apiEnabled"><input id="apiEnabled" type="checkbox"><span class="switch-ui"></span><span><b>فعال‌سازی اتصال API</b><small>در صورت فعال بودن، درخواست‌ها با کلید تنظیم‌شده ارسال می‌شوند.</small></span></label>
+      </div>
+      <div class="api-actions"><button type="button" id="apiTestBtn" class="btn ghost">🔌 آزمون اتصال</button><button type="button" id="apiSyncBtn" class="btn">⇧ همگام‌سازی با Backend</button><button type="button" id="apiSaveBtn" class="btn ghost">ذخیره تنظیمات</button></div>
+      <div id="apiMessage" class="api-message" aria-live="polite">تنظیمات فقط در همین مرورگر ذخیره می‌شوند.</div>
+      <div class="api-security">🔒 کلید در localStorage مرورگر ذخیره می‌شود؛ از رایانهٔ مشترک خارج شوید و برای محیط حساس، توکن کوتاه‌عمر استفاده کنید. مرورگر ممکن است به‌دلیل CORS یا محتوای مختلط، اتصال را مسدود کند.</div>
+    </div>
+    <aside class="panel api-side"><h3>📦 داده‌های همگام‌سازی</h3><p>ارسال وضعیت واژه‌ها و پیشرفت پروفایل فعال به‌صورت JSON.</p><div class="api-stat"><span>پروفایل فعال</span><b id="apiProfile">—</b></div><div class="api-stat"><span>تعداد واژه‌های سفارشی</span><b id="apiWords">۰</b></div><div class="api-stat"><span>آخرین همگام‌سازی موفق</span><b id="apiLastSync">هنوز انجام نشده</b></div><small>Backend باید endpointهای <code dir="ltr">GET /health</code> و <code dir="ltr">POST /sync</code> را ارائه کند.</small></aside>
+  </div>
+</section>
+
+</main>
+
+<footer>واژه‌سنج · سطح سفارشی ➕ · آزمون نامحدود + املا 🎧 · آپلود متن/فیلم گرامر 🎬 · برنامه‌ریز خودکار ⚙️</footer>
+
+<button id="chatFab" title="دستیار هوشمند واژه‌یار">🤖</button>
+<div id="chatPanel">
+  <div class="chat-h">
+    <div class="av">🤖</div>
+    <div><div class="nm">واژه‌یار</div><div class="st2">دستیار هوشمند · آنلاین</div></div>
+    <button class="x" id="chatClose">✕</button>
+  </div>
+  <div id="chatBody"></div>
+  <div class="chat-q" id="chatQuick"></div>
+  <div class="chat-in">
+    <button class="icon-btn" id="chatMic" title="گفتار">🎤</button>
+    <input id="chatIn" placeholder="بنویسید: معنی resilience …">
+    <button class="btn sm" id="chatSend">ارسال</button>
+  </div>
+</div>
+<div id="toasts"></div>
+<input type="file" id="imgIn" accept="image/*" hidden>
+
+<script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+
+<script>
+/* ═══════════ داده‌ها ═══════════ */
+const BASE_LV=[
+{id:'A1',name:'مبتدی',color:'#7ee0a3'},{id:'A2',name:'مقدماتی',color:'#5cc3ff'},
+{id:'B1',name:'متوسط',color:'#ffd166'},{id:'B2',name:'فرامتوسط',color:'#ff9838'},
+{id:'C1',name:'پیشرفته',color:'#ff7a6b'},{id:'C2',name:'تسلط کامل',color:'#ef6aa5'}];
+const TOPICS=['خانواده','خوراک','طبیعت','سفر','کار','فناوری','احساسات','علم','هنر','سلامت','آموزش','روزمره'];
+const S=[
+['apple','سیب','A1','خوراک','/ˈæp.əl/','I eat an apple every day.'],['water','آب','A1','خوراک','/ˈwɔː.tər/','Can I have some water, please?'],
+['bread','نان','A1','خوراک','/bred/','We buy fresh bread every morning.'],['mother','مادر','A1','خانواده','/ˈmʌð.ər/','My mother is very kind.'],
+['father','پدر','A1','خانواده','/ˈfɑ.ðər/','His father works in a bank.'],['sister','خواهر','A1','خانواده','/ˈsɪs.tər/','My sister is ten years old.'],
+['house','خانه','A1','روزمره','/haʊs/','Their house has a small garden.'],['book','کتاب','A1','آموزش','/bʊk/','This book is very interesting.'],
+['teacher','آموزگار','A1','کار','/ˈtiː.tʃər/','Our teacher explains everything well.'],['sun','خورشید','A1','طبیعت','/sʌn/','The sun rises in the east.'],
+['rain','باران','A1','طبیعت','/reɪn/','We stayed home because of the rain.'],['cat','گربه','A1','طبیعت','/kæt/','The cat is sleeping on the sofa.'],
+['dog','سگ','A1','طبیعت','/dɒɡ/','Their dog loves long walks.'],['red','قرمز','A1','هنر','/red/','She wears a red dress today.'],
+['happy','خوشحال','A1','احساسات','/ˈhæp.i/','The children look very happy.'],['walk','پیاده‌روی','A1','روزمره','/wɔːk/','I walk to school every day.'],
+['school','مدرسه','A1','آموزش','/skuːl/','The school opens at eight.'],['friend','دوست','A1','روزمره','/frend/','Ali is my best friend.'],
+['hand','دست','A1','سلامت','/hænd/','Wash your hands before lunch.'],['car','ماشین','A1','سفر','/kɑːr/','My uncle drives a blue car.'],
+['city','شهر','A1','سفر','/ˈsɪt.i/','Tehran is a big city.'],['job','شغل','A1','کار','/dʒɒb/','She found a new job last week.'],
+['phone','تلفن','A1','فناوری','/fəʊn/','My phone battery is low.'],['music','موسیقی','A1','هنر','/ˈmju.zɪk/','I listen to music on the bus.'],
+['doctor','پزشک','A1','سلامت','/ˈdɒk.tər/','You should see a doctor.'],['small','کوچک','A1','روزمره','/smɔːl/','They live in a small apartment.'],
+['eat','خوردن','A1','خوراک','/iːt/','We eat dinner at eight.'],
+['breakfast','صبحانه','A2','خوراک','/ˈbrek.fəst/','I always have breakfast at seven.'],['weather','آب‌وهوا','A2','طبیعت','/ˈweð.ər/','The weather is cloudy today.'],
+['ticket','بلیت','A2','سفر','/ˈtɪk.ɪt/','I bought two train tickets.'],['market','بازار','A2','روزمره','/ˈmɑ.kɪt/','We shop at the local market.'],
+['money','پول','A2','کار','/ˈmʌn.i/','He saved enough money for a bike.'],['kitchen','آشپزخانه','A2','روزمره','/ˈkɪtʃ.ɪn/','The kitchen smells wonderful.'],
+['garden','باغ','A2','طبیعت','/ˈɡɑː.dən/','There are flowers in the garden.'],['animal','جانور','A2','طبیعت','/ˈæn..məl/','We saw wild animals in the forest.'],
+['journey','سفر','A2','سفر','/ˈdʒɜː.ni/','The journey took five hours.'],['neighbor','همسایه','A2','خانواده','/ˈneɪ.bər/','Our neighbors are very friendly.'],
+['tired','خسته','A2','سلامت','/taɪəd/','I feel tired after work.'],['angry','عصبانی','A2','احساسات','/ˈæŋ.ɡri/','Don\'t be angry about the mistake.'],
+['surprise','غافلگیری','A2','احساسات','/səˈpraɪz/','The party was a big surprise.'],['homework','تکلیف','A2','آموزش','/ˈhəʊm.wɜːk/','Finish your homework before dinner.'],
+['exam','آزمون','A2','آموزش','/ɪɡˈzæm/','She passed the math exam.'],['library','کتابخانه','A2','آموزش','/ˈlaɪ.brər.i/','I study at the library after class.'],
+['museum','موزه','A2','هنر','/mjuˈziː.əm/','We visited the history museum.'],['cinema','سینما','A2','هنر','/ˈsɪn.ə.mɑː/','Let\'s go to the cinema tonight.'],
+['train','قطار','A2','سفر','/treɪn/','The train leaves at nine.'],['airport','فرودگاه','A2','سفر','/ˈeə.pɔːt/','We arrived at the airport early.'],
+['email','ایمیل','A2','فناوری','/ˈiː.meɪl/','Send me an email with the details.'],['message','پیام','A2','فناوری','/ˈmes.ɪdʒ/','He sent me a short message.'],
+['headache','سردرد','A2','سلامت','/ˈhed.ek/','I have a terrible headache.'],['medicine','دارو','A2','سلامت','/ˈmed.ɪ.sən/','Take your medicine after food.'],
+['exercise','ورزش','A2','سلامت','/ˈek.sə.saɪz/','Morning exercise gives you energy.'],['favorite','موردِ علاقه','A2','روزمره','/ˈfeɪ.vər.ɪt/','Blue is my favorite color.'],
+['environment','زیست‌بوم','B1','طبیعت','/ɪnˈvaɪ.rən.mənt/','We must protect the environment.'],['experience','تجربه','B1','کار','/ɪkˈspɪə.ri.əns/','She has five years of experience.'],
+['interview','مصاحبه','B1','کار','/ˈɪn.tə.vjuː/','His job interview went very well.'],['opinion','نظر','B1','روزمره','/əˈpɪn.jən/','In my opinion, this plan works.'],
+['advice','توصیه','B1','روزمره','/ədˈvaɪs/','Thank you for your helpful advice.'],['passenger','مسافر','B1','سفر','/ˈpæs.ən.dʒər/','The bus was full of passengers.'],
+['luggage','چمدان','B1','سفر','/ˈlʌɡ.ɪdʒ/','My luggage was very heavy.'],['invention','اختراع','B1','علم','/ɪnˈven.ʃən/','The telephone was a great invention.'],
+['experiment','آزمایش','B1','علم','/ɪkˈsper.ɪ.mənt/','The students did a science experiment.'],['research','پژوهش','B1','علم','/rɪˈsɜːtʃ/','The research took two years.'],
+['achievement','دستاورد','B1','کار','/əˈtʃiːv.mənt/','Winning the prize was a great achievement.'],['confident','بااعتمادبه‌نفس','B1','احساسات','/ˈkɒn.f.dənt/','She feels confident before exams.'],
+['disappointed','ناامید','B1','احساسات','/ˌdɪs.əˈpɔɪn.tɪd/','I was disappointed by the result.'],['curious','کنجکاو','B1','احساسات','/ˈkjʊə.ri.əs/','Children are curious about everything.'],
+['exhibition','نمایشگاه','B1','هنر','/ˌek.sˈbɪʃ.ən/','The art exhibition opens on Friday.'],['sculpture','مجسمه','B1','هنر','/ˈskʌlp.tʃər/','This sculpture is made of bronze.'],
+['novel','رمان','B1','هنر','/ˈnɒv.əl/','He writes a novel every year.'],['salary','حقوق','B1','کار','/ˈsæl.ər.i/','Her salary increased this year.'],
+['colleague','همکار','B1','کار','/ˈkɒl.iːɡ/','My colleagues helped me a lot.'],['deadline','مهلت تحویل','B1','کار','/ˈded.laɪn/','The deadline is next Monday.'],
+['battery','باتری','B1','فناوری','/ˈbæt.ər.i/','My laptop battery died suddenly.'],['software','نرم‌افزار','B1','فناوری','/ˈsɒft.weər/','Update your software regularly.'],
+['screen','نمایشگر','B1','فناوری','/skriːn/','Clean your phone screen often.'],['recipe','دستور پخت','B1','خوراک','/ˈres.ɪ.pi/','This recipe needs three eggs.'],
+['flavor','طعم','B1','خوراک','/ˈfleɪ.vər/','I love the flavor of saffron.'],
+['sustainable','پایدار','B2','طبیعت','/səˈsteɪ.nə.bəl/','We need sustainable energy sources.'],['pollution','آلودگی','B2','طبیعت','/pəˈluː.ʃən/','Air pollution harms our health.'],
+['negotiation','مذاکره','B2','کار','/nɪˌɡəʊ.ʃiˈeɪ.ʃən/','The negotiation lasted three days.'],['entrepreneur','کارآفرین','B2','کار','/ˌɒn.trə.prəˈnːr/','The entrepreneur started two companies.'],
+['investment','سرمایه‌گذاری','B2','کار','/ɪnˈvest.mənt/','Education is the best investment.'],['economy','اقتصاد','B2','کار','/ɪˈkɒn.ə.mi/','The economy is growing slowly.'],
+['hypothesis','فرضیه','B2','علم','/haɪˈpɒθ.ə.sɪs/','The experiment tested her hypothesis.'],['laboratory','آزمایشگاه','B2','علم','/ləˈbɒr.ə.tər.i/','New medicines are tested in the laboratory.'],
+['gravity','گرانش','B2','علم','/ˈɡræv.ə.ti/','Gravity keeps us on the ground.'],['abstract','انتزاعی','B2','هنر','/ˈæb.strækt/','Abstract art makes you think.'],
+['masterpiece','شاهکار','B2','هنر','/ˈmɑ.stə.piːs/','This painting is his masterpiece.'],['rhythm','ریتم','B2','هنر','/ˈrɪð.əm/','I love the rhythm of this song.'],
+['anxiety','اضطراب','B2','احساسات','/æŋˈzaɪ.ə.ti/','Deep breathing reduces anxiety.'],['empathy','همدلی','B2','احساسات','/ˈem.pə.θi/','A good leader shows empathy.'],
+['nostalgia','نوستالژی','B2','احساسات','/nɒsˈtæl.dʒə/','Old photos fill me with nostalgia.'],['algorithm','الگوریتم','B2','فناوری','/ˈæl.ɡə.rɪ.ðəm/','The algorithm learns from your choices.'],
+['artificial','مصنوعی','B2','فناوری','/ˌɑː.tɪˈfɪʃ.əl/','Artificial intelligence is changing jobs.'],['database','پایگاه داده','B2','فناوری','/ˈdeɪ.tə.beɪs/','Customer names are stored in a database.'],
+['ingredient','مادهٔ اولیه','B2','خوراک','/ɪnˈɡri.di.ənt/','Fresh ingredients make better food.'],['cuisine','آشپزی','B2','خوراک','/kwɪˈziːn/','Persian cuisine is famous worldwide.'],
+['symptom','نشانهٔ بیماری','B2','سلامت','/ˈsɪmp.təm/','Fever is a common symptom of flu.'],['diagnosis','تشخیص','B2','سلامت','/ˌdaɪ.əɡˈnə.sɪs/','The doctor gave a quick diagnosis.'],
+['immune','ایمن','B2','سلامت','/ɪˈmjun/','Sleep strengthens the immune system.'],['destination','مقصد','B2','سفر','/ˌdes.tɪˈneɪ.ʃən/','Our final destination was Shiraz.'],
+['itinerary','برنامهٔ سفر','B2','سفر','/aɪˈtɪn.ər.ər.i/','The itinerary includes three cities.'],['ancestor','نیاکان','B2','خانواده','/ˈæn.ses.tər/','Our ancestors lived in this valley.'],
+['resilience','تاب‌آوری','C1','احساسات','/rɪˈzɪl.i.əns/','Resilience helped her survive hard times.'],['meticulous','دقیق و وسواسی','C1','کار','/məˈtɪk.jə.ləs/','She keeps meticulous records of expenses.'],
+['paradox','پارادوکس','C1','علم','/ˈpær.ə.dɒks/','It\'s a paradox that busy people find more time.'],['empirical','تجربی','C1','علم','/ɪmˈpɪr.ɪ.kəl/','The theory needs empirical evidence.'],
+['quantify','کمّی‌سازی کردن','C1','علم','/ˈkwɒn.tɪ.faɪ/','It is hard to quantify happiness.'],['aesthetic','زیبایی‌شناختی','C1','هنر','/iːsˈθet.ɪk/','The building has a modern aesthetic.'],
+['eloquence','فصاحت','C1','هنر','/ˈel.ə.kwəns/','His eloquence moved the whole audience.'],['nuance','ظرافت معنایی','C1','هنر','/ˈnjuː.ɑːns/','Translation depends on nuance.'],
+['scrutinize','موشکافی کردن','C1','کار','/ˈskruː.tɪ.naɪz/','Auditors scrutinize every invoice.'],['implement','اجرا کردن','C1','کار','/ˈɪm.plɪ.ment/','We will implement the new policy next month.'],
+['bureaucracy','دیوان‌سالاری','C1','کار','/bjʊəˈrɒk.rə.si/','Too much bureaucracy slows decisions.'],['ubiquitous','فراگیر','C1','فناوری','/juːˈbɪk.w.təs/','Smartphones have become ubiquitous.'],
+['obsolete','منسوخ','C1','فناوری','/ˌɒb.səlˈiːt/','Fax machines are almost obsolete.'],['innovate','نوآوری کردن','C1','فناوری','/ˈɪn.ə.veɪt/','Companies must innovate to survive.'],
+['contagious','مُسری','C1','سلامت','/kənˈteɪ.dʒəs/','Laughter is contagious.'],['therapy','درمان','C1','سلامت','/ˈθer.ə.pi/','Music therapy reduces stress.'],
+['longevity','طول عمر','C1','سلامت','/lɒnˈdʒev.ə.ti/','Exercise is linked to longevity.'],['expedition','هیات اکتشافی','C1','سفر','/ˌek.spəˈdɪʃ.ən/','The expedition crossed the desert.'],
+['dilemma','دوراهی','C1','احساسات','/dɪˈlem.ə/','She faced a difficult dilemma.'],['melancholy','اندوه','C1','احساسات','/ˈmel.ən.kɒl.i/','Autumn fills him with melancholy.'],
+['metaphor','استعاره','C1','هنر','/ˈmet.ə.fər/','Life is a metaphor for a journey.'],['protagonist','شخصیت اصلی','C1','هنر','/prəˈtæɡ.ən.ɪst/','The protagonist changes by the end.'],
+['ecosystem','بوم‌سازگان','C1','طبیعت','/ˈiː.kəˌsɪs.təm/','Coral reefs are fragile ecosystems.'],['biodiversity','تنوع زیستی','C1','طبیعت','/ˌbaɪ.əʊ.daɪˈvɜ.sə.ti/','Biodiversity keeps nature in balance.'],
+['ephemeral','زودگذر','C2','طبیعت','/ɪˈfem.ər.əl/','Fame online is often ephemeral.'],['serendipity','خوش‌اقبالی تصادفی','C2','احساسات','/ˌser.ənˈdɪp.ə.ti/','Meeting her was pure serendipity.'],
+['quintessential','نمونهٔ کامل','C2','هنر','/ˌkwɪn.tɪˈsen.ʃəl/','He is the quintessential gentleman.'],['obfuscate','مبهم کردن','C2','آموزش','/ˈɒb.fʌ.skeɪt/','Jargon can obfuscate ideas.'],
+['perspicacious','تیزبین','C2','کار','/ˌpɜː.spɪˈkeɪ.əs/','A perspicacious investor spotted it.'],['magnanimity','بزرگواری','C2','احساسات','/ˌmæɡ.nəˈnɪm.ə.ti/','She showed magnanimity in victory.'],
+['vicissitude','فراز و نشیب','C2','روزمره','/vɪˈsɪs..tjuːd/','They endured vicissitudes of war.'],['recalcitrant','سرکش','C2','روزمره','/rɪˈkæl.sɪ.trənt/','The recalcitrant student refused.'],
+['sycophant','چاپلوس','C2','کار','/ˈsɪk.ə.fænt/','The king trusted sycophants.'],['hegemony','هژمونی','C2','کار','/hɪˈɡem.ə.ni/','The empire sought hegemony.'],
+['epistemology','معرفت‌شناسی','C2','علم','/ɪˌpɪs.təˈmɒl.ə.dʒi/','Epistemology studies knowledge.'],['paradigm','پارادایم','C2','علم','/ˈpær.ə.daɪm/','A paradigm shift occurred.'],
+['synthesis','ترکیب','C2','علم','/ˈsɪn.θə.sɪs/','A synthesis of three theories.'],['juxtaposition','تقابل','C2','هنر','/ˌdʒʌk.stə.pəˈzɪʃ.ən/','Juxtaposition of war and peace.'],
+['catharsis','تخلیهٔ هیجان','C2','هنر','/kəˈθɑː.sɪs/','The ending brings catharsis.'],['iconoclast','ساختارشکن','C2','هنر','/aɪˈkɒn.ə.klæst/','An iconoclast of tradition.'],
+['altruism','نوع‌دوستی','C2','احساسات','/ˈæl.tru.ɪ.zəm/','True altruism expects nothing.'],['apathy','بی‌تفاوتی','C2','احساسات','/ˈæp.ə.θi/','Voter apathy grew.'],
+['panacea','درمان هر درد','C2','سلامت','/ˌpæn.əˈsiː.ə/','No panacea exists.'],['atrophy','تحلیل رفتن','C2','سلامت','/ˈæt.rə.fi/','Muscles atrophy unused.'],
+['prophylactic','پیشگیرانه','C2','سلامت','/ˌprɒf.ɪˈlæk.tɪk/','Prophylactic treatment helped.'],['itinerant','دوره‌گرد','C2','سفر','/aɪˈtɪn.ər.ənt/','Itinerant workers moved on.'],
+['odyssey','سفر پرماجرا','C2','سفر','/ˈd.ə.si/','An odyssey across Asia.'],['soliloquy','تک‌گویی','C2','هنر','/səˈlɪl.ə.kwi/','Hamlet\'s soliloquy.'],
+['zeitgeist','روح زمانه','C2','هنر','/ˈzaɪt.ɡaɪst/','It captured the zeitgeist.']];
+const BANK=S.map(a=>({w:a[0],fa:a[1],lv:a[2],t:a[3],ipa:a[4],ex:a[5]}));
+const GRAMMAR=[
+{lv:'A1',tt:'فعل to be و جملهٔ ساده',body:'برای معرفی و بیان حالت از <b dir="ltr">am / is / are</b> استفاده می‌کنیم.',ex:[['I am a student.','من دانش‌آموز هستم.'],['She is happy today.','او امروز خوشحال است.']]},
+{lv:'A2',tt:'گذشتهٔ ساده و استمراری',body:'گذشتهٔ ساده برای کار تمام‌شده و استمراری برای کار در حال ادامه در گذشته.',ex:[['I visited the museum yesterday.','دیروز از موزه دیدن کردم.'],['It was raining when we left.','هنگام رفتن ما باران می‌بارید.']]},
+{lv:'B1',tt:'حال کامل (Present Perfect)',body:'با <b dir="ltr">have/has + p.p</b> تجربه یا اثر باقی‌مانده را بیان می‌کنیم.',ex:[['I have never tried sushi.','هرگز سوشی امتحان نکرده‌ام.'],['She has lived here since 2020.','او از ۲۰۲۰ اینجا زندگی کرده است.']]},
+{lv:'B2',tt:'جملات شرطی',body:'شرطی نوع دوم برای موقعیت خیالی و نوع سوم برای حسرت گذشته.',ex:[['If I had more time, I would travel.','اگر وقت داشتم سفر می‌کردم.'],['If you had called me, I would have helped.','اگر زنگ می‌زدی کمک می‌کردم.']]},
+{lv:'C1',tt:'وارونگی و تأکید',body:'قید منفی اول جمله → جابجایی فاعل و فعل.',ex:[['Never have I seen such a view.','هرگز چنین منظره‌ای ندیده‌ام.']]},
+{lv:'C2',tt:'التزامی پیشرفته',body:'پس از suggest / insist مصدر ساده.',ex:[['They insisted that he be present.','اصرار کردند او حاضر باشد.']]}];
+
+/* ═══════════ وضعیت ═══════════ */
+const PROFILE_KEY='vazhesanj-v4:profiles';
+let profileNames=[];try{profileNames=JSON.parse(localStorage.getItem(PROFILE_KEY)||'[]');}catch(e){console.error('Unable to read profile list from localStorage:',e);}
+if(!Array.isArray(profileNames))profileNames=[];
+const ACTIVE_PROFILE_KEY='vazhesanj-v4:active';
+let activeUsername='پیش‌فرض';
+try{const storedProfile=localStorage.getItem(ACTIVE_PROFILE_KEY);if(typeof storedProfile==='string'&&storedProfile.trim())activeUsername=storedProfile.trim();}catch(e){console.error('Unable to read active profile from localStorage:',e);}
+if(!profileNames.includes(activeUsername))profileNames.push(activeUsername);
+try{localStorage.setItem(PROFILE_KEY,JSON.stringify(profileNames));localStorage.setItem(ACTIVE_PROFILE_KEY,activeUsername);}catch(e){console.error('Unable to initialize profile data in localStorage:',e);}
+let LS='vazhesanj-v4:'+activeUsername;
+let state={xp:0,streak:0,lastDay:null,goal:20,learned:{},hard:{},seen:{},star:{},images:{},plan:{},history:{},rep:{},grad:{},deletedWords:[],quiz:{n:0,ok:0,all:0},custom:[],lvls:null,gramText:[],planCfg:{perDay:10,days:7,lv:'همه'},saveTime:0,scheduleSessions:[],dailyGoalMinutes:30};
+try{let raw=localStorage.getItem(LS);if(!raw&&activeUsername==='پیش‌فرض'){raw=localStorage.getItem('vazhesanj-v4')||localStorage.getItem('vazhesanj-v3');}
+if(raw){const p=JSON.parse(raw);state=Object.assign(state,p);if(p.known)state.learned=Object.assign({},p.known,state.learned);}}catch(e){}
+['learned','hard','seen','star','images','plan','history','rep','grad','gramText'].forEach(k=>state[k]=state[k]||[]&&state[k]||state[k]||{});
+if(!Array.isArray(state.gramText))state.gramText=[];
+if(!state.lvls)state.lvls=JSON.parse(JSON.stringify(BASE_LV));
+state.planCfg=Object.assign({perDay:10,days:7,lv:'همه'},state.planCfg||{});
+
+const $=s=>document.querySelector(s);
+const fa=n=>Number(n).toLocaleString('fa-IR');
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+const keyOf=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+const todayKey=()=>keyOf(new Date());
+const yesterKey=()=>keyOf(new Date(Date.now()-864e5));
+const normW=w=>(w||'').trim().toLowerCase();
+/* سطح‌های پویا */
+const LV=()=>state.lvls;
+const lvIds=()=>LV().map(l=>l.id);
+const lvColor=id=>{const l=LV().find(x=>x.id===id);return l?l.color:'#8fb0b6';};
+const lvName=id=>{const l=LV().find(x=>x.id===id);return l?l.name:id;};
+const allWords=()=>BANK.concat(state.custom).filter(x=>!(state.deletedWords||[]).includes(x.w));
+const findWord=w=>allWords().find(x=>x.w===w);
+const isLearned=w=>!!state.learned[w];
+const isHard=w=>!!state.hard[w];
+
+const REP_DAYS=[1,2,4,7,15];
+const REP_LABEL=['فردا','۲ روز بعد','۴ روز بعد','۱ هفته بعد','۲ هفته بعد'];
+function scheduleRep(w,stage){const d=new Date();d.setDate(d.getDate()+REP_DAYS[stage-1]);state.rep[w]={s:stage,n:keyOf(d)};}
+function dueWords(lv){const k=todayKey();
+return Object.keys(state.rep).filter(w=>{const r=state.rep[w];if(!r||r.n>k)return false;
+const wd=findWord(w);return wd&&(!lv||lv==='همه'||wd.lv===lv);}).map(findWord);}
+
+function save(){try{localStorage.setItem(LS,JSON.stringify(state));return true;}catch(e){console.error('Failed to save application state to localStorage:',e);toast('ذخیره‌سازی انجام نشد؛ فضای مرورگر یا دسترسی حافظه را بررسی کنید.',1);return false;}}
+function toast(msg,err){const t=document.createElement('div');t.className='toast'+(err?' err':'');t.innerHTML=msg;$('#toasts').appendChild(t);
+setTimeout(()=>{t.style.opacity=0;t.style.transition='.4s';setTimeout(()=>t.remove(),400);},3000);}
+function dedupeBank(silent){
+  const seenSet=new Set(BANK.map(x=>normW(x.w)));
+  const before=state.custom.length;
+  state.custom=state.custom.filter(x=>{const k=normW(x.w);if(!k||seenSet.has(k))return false;seenSet.add(k);return true;});
+  const removed=before-state.custom.length;
+  const valid=new Set(allWords().map(x=>x.w));
+  ['learned','hard','seen','star','rep','grad'].forEach(k=>{Object.keys(state[k]).forEach(w=>{if(!valid.has(w))delete state[k][w];});});
+  Object.keys(state.plan).forEach(d=>{if(state.plan[d].words)state.plan[d].words=state.plan[d].words.filter(w=>valid.has(w));});
+  if(removed>0){save();if(!silent)toast(`🧹 ${fa(removed)} لغت تکراری به‌صورت خودکار حذف شد`);}
+  return removed;}
+dedupeBank(false);
+function stampSave(){const d=new Date(state.saveTime||Date.now());$('#saveTime').textContent=d.toLocaleTimeString('fa-IR');
+const p=$('#saveBtn');p.classList.remove('bump');void p.offsetWidth;p.classList.add('bump');}
+function saveNow(manual){state.saveTime=Date.now();const saved=save();if(saved)stampSave();
+if(saved&&dirHandle&&$('#autoFolder').checked)writeFolder().catch(e=>{console.error('Failed to write backup folder:',e);if(manual)toast('ذخیره در پوشه انجام نشد؛ مجوز پوشه را بررسی کنید.',1);});
+else if(saved&&manual)toast('ذخیره شد 💾');}
+$('#saveBtn').onclick=()=>saveNow(true);
+setInterval(()=>saveNow(false),30000);
+function touchDay(){const k=todayKey();if(state.lastDay!==k){state.streak=(state.lastDay===yesterKey())?state.streak+1:1;state.lastDay=k;}}
+const todayCount=()=>state.history[todayKey()]||0;
+function addXP(n){state.xp+=n;save();$('#xpVal').textContent=fa(state.xp);}
+function setLearned(w){const was=state.learned[w];state.learned[w]=1;delete state.hard[w];state.seen[w]=1;
+if(!was){touchDay();state.history[todayKey()]=(state.history[todayKey()]||0)+1;addXP(5);
+if(!state.grad[w])scheduleRep(w,1);}save();refreshAll();}
+function setHard(w){const was=state.hard[w];state.hard[w]=1;delete state.learned[w];delete state.rep[w];state.seen[w]=1;save();refreshAll();
+if(!was)toast('قرمز شد و به باکس لغات دشوار منتقل شد ❌');}
+
+let voices=[];function loadVoices(){voices=speechSynthesis.getVoices();}
+if('speechSynthesis'in window){loadVoices();speechSynthesis.onvoiceschanged=loadVoices;}
+function speak(text,lang='en-US'){if(!('speechSynthesis'in window))return;
+speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang=lang;u.rate=.92;
+const v=voices.find(v=>v.lang.startsWith(lang.split('-')[0]))||voices.find(v=>v.lang.startsWith('en'));if(v)u.voice=v;speechSynthesis.speak(u);}
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+function lev(a,b){a=a.toLowerCase().replace(/[^a-z]/g,'');b=b.toLowerCase().replace(/[^a-z]/g,'');const m=[];for(let i=0;i<=b.length;i++)m[i]=[i];for(let j=0;j<=a.length;j++)m[0][j]=j;
+for(let i=1;i<=b.length;i++)for(let j=1;j<=a.length;j++)m[i][j]=b[i-1]===a[j-1]?m[i-1][j-1]:Math.min(m[i-1][j-1]+1,m[i][j-1]+1,m[i-1][j]+1);return m[b.length][a.length];}
+function countUp(el,to){const from=+(el.dataset.v||0);el.dataset.v=to;const t0=performance.now();
+(function step(t){const p=Math.min(1,(t-t0)/800);el.textContent=fa(Math.round(from+(to-from)*p));if(p<1)requestAnimationFrame(step);})(t0);}
+function compressImage(file,cb){const img=new Image(),url=URL.createObjectURL(file);
+img.onload=()=>{const s=Math.min(1,230/Math.max(img.width,img.height));
+const c=document.createElement('canvas');c.width=Math.max(1,img.width*s);c.height=Math.max(1,img.height*s);
+c.getContext('2d').drawImage(img,0,0,c.width,c.height);cb(c.toDataURL('image/jpeg',.72));URL.revokeObjectURL(url);};
+img.onerror=()=>toast('فایل عکس خوانده نشد',1);img.src=url;}
+
+/* ═══════════ پس‌زمینه/تیکر ═══════════ */
+(function(){const box=$('#floaters'),ch=['A','b','C','d','E','k','s','W','o','r','?','!','g','R'];
+for(let i=0;i<18;i++){const s=document.createElement('span');s.textContent=ch[i%ch.length];
+s.style.left=Math.random()*100+'vw';s.style.fontSize=(16+Math.random()*46)+'px';
+s.style.animationDuration=(20+Math.random()*26)+'s';s.style.animationDelay=(-Math.random()*30)+'s';box.appendChild(s);}})();
+let tickI=0;setInterval(()=>{const el=$('#tickerTx');el.classList.add('out');setTimeout(()=>{tickI=(tickI+1)%BANK.length;const w=BANK[tickI];
+el.innerHTML=`<b dir="ltr">${w.w}</b> — ${w.fa} (${w.lv})`;el.classList.remove('out');},500);},6000);
+$('#tickerTx').innerHTML=`<b dir="ltr">${BANK[0].w}</b> — ${BANK[0].fa} (${BANK[0].lv})`;
+
+/* ═══════════ شمارش/دونات ═══════════ */
+function statusCounts(){const bank=allWords(),total=bank.length;
+const L=Object.keys(state.learned).length,H=Object.keys(state.hard).length;
+const set=new Set(bank.map(x=>x.w));
+const SE=Object.keys(state.seen).filter(w=>!state.learned[w]&&!state.hard[w]&&set.has(w)).length;
+return{total,L,H,SE,R:Math.max(0,total-L-H-SE)};}
+const COOLWARM=['#5cc3ff','#2fd6c3','#ffd166','#ff7a6b'];
+function drawDonutSegs(c,S,vals,centerTx,sub){let a=-Math.PI/2;const cx=S/2,cy=S/2,r=S/2-20;const tot=vals.reduce((x,y)=>x+y[0],0)||1;
+vals.forEach(([v,col])=>{const ang=v/tot*Math.PI*2;
+if(v>0){c.beginPath();c.strokeStyle=col;c.lineWidth=21;c.arc(cx,cy,r,a+0.012,Math.max(a+0.012,a+ang-0.012));c.stroke();}a+=ang;});
+c.fillStyle='#ff7a6b';c.font=(S>190?'32px':'24px')+' Lalezar';c.textAlign='center';c.fillText(centerTx,cx,cy+4);
+c.fillStyle='#8fb0b5';c.font='11px Vazirmatn';c.fillText(sub,cx,cy+22);}
+function drawStatusDonut(cv,S){const{total,L,H,SE,R}=statusCounts();
+const c=cv.getContext('2d'),dpr=devicePixelRatio||1;
+cv.width=S*dpr;cv.height=S*dpr;cv.style.width=S+'px';cv.style.height=S+'px';
+c.setTransform(dpr,0,0,dpr,0,0);c.clearRect(0,0,S,S);
+drawDonutSegs(c,S,[[R,COOLWARM[0]],[SE,COOLWARM[1]],[H,COOLWARM[2]],[L,COOLWARM[3]]],fa(total?Math.round(L/total*100):0)+'٪','پیشرفت کل');
+return{L,H,SE,R};}
+function drawSummary(){const{total,L,H,SE,R}=statusCounts();
+countUp($('#sumTotal'),total);countUp($('#sumLearn'),L);countUp($('#sumHard'),H);countUp($('#sumRest'),R+SE);
+drawStatusDonut($('#sumDonut'),210);
+$('#sumLegend').innerHTML=
+`<span><i style="background:#5cc3ff"></i>مانده: <b style="color:var(--ink)">${fa(R)}</b></span>
+<span><i style="background:#2fd6c3"></i>دیده‌شده: <b style="color:var(--ink)">${fa(SE)}</b></span>
+<span><i style="background:#ffd166"></i>دشوار: <b style="color:var(--ink)">${fa(H)}</b></span>
+<span><i style="background:#ff7a6b"></i>یادگرفتم: <b style="color:var(--ink)">${fa(L)}</b></span>`;}
+/* داشبورد دایره‌ای هر سطح */
+function drawLevelDonuts(){const box=$('#lvDonuts');
+box.innerHTML=LV().map(l=>`<div class="lvd"><canvas id="lvd_${l.id}" width="130" height="130" style="width:130px;max-width:130px"></canvas>
+<div class="lvd-name" style="color:${l.color}">${l.id} · ${esc(l.name)}</div><div class="lvd-cnt" id="lvdc_${l.id}"></div></div>`).join('');
+LV().forEach(l=>{const list=allWords().filter(x=>x.lv===l.id);
+const L=list.filter(x=>isLearned(x.w)).length,H=list.filter(x=>isHard(x.w)).length;
+const set=new Set(list.map(x=>x.w));
+const SE=Object.keys(state.seen).filter(w=>!state.learned[w]&&!state.hard[w]&&set.has(w)).length;
+const R=Math.max(0,list.length-L-H-SE);
+const cv=document.getElementById('lvd_'+l.id);if(!cv)return;
+const c=cv.getContext('2d'),dpr=devicePixelRatio||1,S=130;
+cv.width=S*dpr;cv.height=S*dpr;c.setTransform(dpr,0,0,dpr,0,0);c.clearRect(0,0,S,S);
+drawDonutSegs(c,S,[[R,COOLWARM[0]],[SE,COOLWARM[1]],[H,COOLWARM[2]],[L,COOLWARM[3]]],
+fa(list.length?Math.round(L/list.length*100):0)+'٪','یادگرفته');
+document.getElementById('lvdc_'+l.id).innerHTML=
+`کل <b style="color:var(--ink)">${fa(list.length)}</b> · ✅ ${fa(L)} · 🧱 ${fa(H)} · ⏳ ${fa(R+SE)}`;});}
+
+/* ═══════════ افزودن سطح جدید ═══════════ */
+$('#btnAddLvToggle').onclick=()=>{const f=$('#addLvForm');f.style.display=f.style.display==='none'?'flex':'none';};
+$('#btnAddLvCancel').onclick=()=>$('#addLvForm').style.display='none';
+$('#btnAddLvSave').onclick=()=>{const name=$('#newLvName').value.trim();if(!name)return toast('نام سطح را بنویسید',1);
+let id=/^[A-Za-z0-9+\-]+$/.test(name)?name.toUpperCase():'LV'+(LV().length+1);
+if(LV().some(l=>l.id===id))id=id+'_'+(LV().length+1);
+if(LV().some(l=>l.name===name))return toast('سطحی با این نام وجود دارد',1);
+state.lvls.push({id,name,color:$('#newLvColor').value});save();
+buildLevelControls();refreshAll();$('#addLvForm').style.display='none';$('#newLvName').value='';
+toast(`سطح جدید «${esc(name)}» اضافه شد 🎈 حالا در همهٔ بخش‌ها قابل انتخاب است`);};
+
+/* ═══════════ گیج/باتری/کاشی/زنجیره ═══════════ */
+(function(){const tk=$('#gTicks'),nm=$('#gNums');
+for(let i=0;i<=20;i++){const a=(210-i*12)*Math.PI/180,major=i%2===0,r1=major?95:99,r2=104;
+const l=document.createElementNS('http://www.w3.org/2000/svg','line');
+l.setAttribute('x1',110+Math.cos(a)*r1);l.setAttribute('y1',120-Math.sin(a)*r1);
+l.setAttribute('x2',110+Math.cos(a)*r2);l.setAttribute('y2',120-Math.sin(a)*r2);
+l.setAttribute('stroke',major?'#3d6a7d':'#22465a');l.setAttribute('stroke-width',major?2.4:1.3);tk.appendChild(l);}
+for(let i=0;i<=5;i++){const a=(210-i*48)*Math.PI/180;const t=document.createElementNS('http://www.w3.org/2000/svg','text');
+t.setAttribute('x',110+Math.cos(a)*74);t.setAttribute('y',120-Math.sin(a)*74+4);t.setAttribute('text-anchor','middle');
+t.setAttribute('fill','#5d8494');t.setAttribute('font-size','10');t.setAttribute('font-family','Space Grotesk');t.textContent=i*20;nm.appendChild(t);}})();
+function updateGauge(){const bank=allWords(),pct=bank.length?Math.round(Object.keys(state.learned).length/bank.length*100):0;
+$('#gArcProg').setAttribute('stroke-dasharray',pct+' 100');
+$('#needleG').style.transform=`rotate(${-120+pct*2.4}deg)`;
+$('#gPct').textContent=fa(pct)+'٪';
+$('#gEngine').textContent=pct===0?'در حال گرم‌شدن…':pct<25?'دور آرام 🚗':pct<50?'شتاب‌گیری 🚀':pct<80?'دور بالا ⚡':'سرعت بیشینه! 🏆';}
+function updateBattery(){const pct=Math.min(100,Math.round(todayCount()/state.goal*100));
+$('#batFill').setAttribute('width',Math.max(pct/100*250,pct>0?14:0));
+$('#batPct').textContent=fa(pct)+'٪';
+$('#batTx').textContent=`${fa(todayCount())} از ${fa(state.goal)} واژهٔ امروز`;
+$('#batStatus').innerHTML=pct>=100?'🔋 شارژ کامل! آفرین':(todayCount()>0?'⚡ در حال شارژ…':'⏸ آمادهٔ شارژ');
+document.body.classList.toggle('charging',pct>0&&pct<100);
+$('#goalBtn').textContent='🎯 هدف: '+fa(state.goal);}
+$('#goalBtn').onclick=()=>{const g=[10,20,30,50];state.goal=g[(g.indexOf(state.goal)+1)%g.length];save();updateBattery();toast('هدف روزانه: '+fa(state.goal)+' واژه');};
+function updateTiles(){
+countUp($('#tileKnown'),Object.keys(state.learned).length);
+countUp($('#tileHard'),Object.keys(state.hard).length);
+countUp($('#tileDue'),dueWords(null).length);
+$('#tileAcc').textContent=state.quiz.all?fa(Math.round(state.quiz.ok/state.quiz.all*100))+'٪':'—';
+$('#xpVal').textContent=fa(state.xp);$('#streakVal').textContent=fa(state.streak);
+$('#levelBars').innerHTML=LV().map(l=>{const list=allWords().filter(x=>x.lv===l.id),k=list.filter(x=>isLearned(x.w)).length;
+const p=list.length?Math.round(k/list.length*100):0,c=l.color;
+return `<div class="lvrow"><span class="lv-badge" style="background:${c}">${l.id}</span>
+<div class="bar"><i style="width:${p}%;background:${c};box-shadow:0 0 10px ${c}66"></i></div>
+<span class="lv-count">${fa(k)} / ${fa(list.length)}</span></div>`;}).join('');}
+function drawChain(){const n=state.streak;
+$('#chainInfo').textContent=n?`زنجیرهٔ فعلی: ${fa(n)} روز پیاپی — حفظش کن! 🔥`:'امروز اولین حلقهٔ زنجیره را بسازید!';
+$('#streakChain').innerHTML=n?Array.from({length:Math.min(n,26)},(_,i)=>`<span class="link" style="animation-delay:${i*.05}s">🔗</span>`).join('')+(n>26?`<span class="link more">+${fa(n-26)}</span>`:'')
+:'<span class="chain-dim">هر روز که واژه‌ای یاد بگیرید، یک حلقهٔ طلایی اضافه می‌شود.</span>';
+const hm=$('#heatmap'),N=84,today=new Date();today.setHours(0,0,0,0);
+const start=new Date(today);start.setDate(start.getDate()-(N-1));
+const pad=(start.getDay()+1)%7;let html='';
+for(let i=0;i<pad;i++)html+='<span class="hm empty"></span>';
+for(let i=0;i<N;i++){const d=new Date(start);d.setDate(start.getDate()+i);
+const v=state.history[keyOf(d)]||0,lvl=v===0?0:v<3?1:v<6?2:3;
+html+=`<span class="hm l${lvl}" title="${d.toLocaleDateString('fa-IR')} — ${fa(v)} واژه"></span>`;}
+hm.innerHTML=html;}
+
+/* ═══════════ کنترل‌های سطح (پویا) ═══════════ */
+function buildLevelControls(){const ids=lvIds();
+$('#lvChips').innerHTML=['همه',...ids].map(l=>`<button class="chip lv ${l===FLT.lv?'on':''}" data-lv="${l}">${l}</button>`).join('');
+$('#hardChips').innerHTML=['همه',...ids].map(l=>`<button class="chip lv ${l===HARD_LV?'on':''}" data-hlv="${l}">${l}</button>`).join('');
+$('#repChips').innerHTML=['همه',...ids].map(l=>`<button class="chip ${l===REP_LV?'on':''}" data-rlv="${l}">${l}</button>`).join('');
+const optAll=LV().map(l=>`<option value="${l.id}">${l.id} — ${esc(l.name)}</option>`).join('');
+$('#fLv').innerHTML=optAll;$('#bulkLv').innerHTML=optAll;$('#plLv').innerHTML='<option value="همه">همهٔ سطوح</option>'+optAll;
+$('#cfgLv').innerHTML='<option value="همه">همهٔ سطوح</option>'+optAll;
+$('#qLv').innerHTML='<option value="همه">همهٔ سطوح</option>'+optAll;
+$('#impLv').innerHTML='<option value="auto">🔍 تشخیص خودکار از فایل</option>'+optAll;}
+function renderLevelHubs(){$('#lvHubs').innerHTML=LV().map(l=>{
+const list=allWords().filter(x=>x.lv===l.id);
+const L=list.filter(x=>isLearned(x.w)).length,H=list.filter(x=>isHard(x.w)).length;
+const due=dueWords(l.id).length,p=list.length?Math.round(L/list.length*100):0,c=l.color;
+return `<div class="lvhub" style="border-top:3px solid ${c}">
+<div class="lvh-head"><span class="lv-badge" style="background:${c};font-size:15px">${l.id}</span>
+<div><div class="lvh-name">${esc(l.name)}</div><div class="lvh-sub">${fa(list.length)} واژه در این سطح</div></div>
+<div class="lvh-pct" style="color:${c}">${fa(p)}٪</div></div>
+<div class="bar" style="margin:11px 0"><i style="width:${p}%;background:${c};box-shadow:0 0 8px ${c}66"></i></div>
+<div class="lvh-stats">
+<span style="color:var(--green)">✅ ${fa(L)} یادگرفته</span>
+<span style="color:var(--coral)">🧱 ${fa(H)} دشوار</span>
+<span style="color:var(--sky)">⏳ ${fa(Math.max(0,list.length-L-H))} مانده</span>
+<span style="color:var(--amber)">🔁 ${fa(due)} تکرار امروز</span></div>
+<div class="lvh-btns">
+<button class="lvb" onclick="lvGo('${l.id}','cards')">🃏 فلش‌کارت</button>
+<button class="lvb" onclick="lvGo('${l.id}','quiz')">📝 آزمون</button>
+<button class="lvb" onclick="lvGo('${l.id}','box')">📦 باکس لغات</button>
+<button class="lvb" onclick="lvGo('${l.id}','hard')">🧱 دشوارهای ${l.id}</button>
+<button class="lvb hot wide" onclick="lvGo('${l.id}','rep')">🔁 تکرار ${l.id}${due?' — '+fa(due)+' واژه منتظر':''}</button><button class="lvb" onclick="resetLevel('${l.id}')">↻ ریست سطح</button>
+</div></div>`;}).join('');}
+function syncFilterChips(){document.querySelectorAll('#lvChips .chip').forEach(x=>x.classList.toggle('on',x.dataset.lv===FLT.lv));
+document.querySelectorAll('#tpChips .chip').forEach(x=>x.classList.toggle('on',x.dataset.tp===FLT.tp));}
+function lvGo(lv,target){PLAN_MODE=null;$('#planChip').style.display='none';
+if(target==='cards'){FLT.lv=lv;FLT.tp='همه';FLT.q='';FLT.star=false;syncFilterChips();applyFilter();location.hash='#cards';}
+if(target==='box'){FLT.lv=lv;FLT.tp='همه';syncFilterChips();applyFilter();location.hash='#wordbox';}
+if(target==='quiz'){$('#qLv').value=lv;location.hash='#quiz';toast('آزمون سطح '+lv+' آماده است 📝');}
+if(target==='hard'){HARD_LV=lv;buildLevelControls();renderHard();location.hash='#hardbox';}
+if(target==='rep'){REP_LV=lv;buildLevelControls();renderRepPanel();location.hash='#repeat';}}
+
+/* ═══════════ فلش‌کارت ═══════════ */
+let FLT={lv:'همه',tp:'همه',q:'',star:false},deck=[],di=0,PLAN_MODE=null,QUIZ_POOL=null;
+(function(){
+$('#tpChips').innerHTML=['همه',...TOPICS].map(t=>`<button class="chip ${t==='همه'?'on':''}" data-tp="${t}">${t}</button>`).join('');
+$('#lvChips').addEventListener('click',e=>{const b=e.target.closest('[data-lv]');if(!b)return;document.querySelectorAll('#lvChips .chip').forEach(x=>x.classList.remove('on'));b.classList.add('on');FLT.lv=b.dataset.lv;applyFilter();});
+$('#tpChips').addEventListener('click',e=>{const b=e.target.closest('[data-tp]');if(!b)return;document.querySelectorAll('#tpChips .chip').forEach(x=>x.classList.remove('on'));b.classList.add('on');FLT.tp=b.dataset.tp;applyFilter();});
+$('#qSearch').oninput=e=>{FLT.q=e.target.value.trim().toLowerCase();applyFilter();};
+$('#starFlt').onclick=()=>{FLT.star=!FLT.star;$('#starFlt').classList.toggle('on',FLT.star);applyFilter();};
+$('#resetFlt').onclick=()=>{FLT={lv:'همه',tp:'همه',q:'',star:false};PLAN_MODE=null;$('#planChip').style.display='none';$('#qSearch').value='';$('#starFlt').classList.remove('on');buildLevelControls();syncFilterChips();
+document.querySelectorAll('#tpChips .chip').forEach((x,i)=>x.classList.toggle('on',i===0));applyFilter();};
+$('#hardChips').addEventListener('click',e=>{const b=e.target.closest('[data-hlv]');if(!b)return;HARD_LV=b.dataset.hlv;buildLevelControls();renderHard();});
+$('#repChips').addEventListener('click',e=>{const b=e.target.closest('[data-rlv]');if(!b)return;REP_LV=b.dataset.rlv;buildLevelControls();renderRepPanel();});
+$('#fTp').innerHTML=TOPICS.map(t=>`<option>${t}</option>`).join('');
+$('#bulkTp').innerHTML=TOPICS.map(t=>`<option>${t}</option>`).join('');
+$('#qTp').innerHTML='<option value="همه">همهٔ موضوعات</option>'+TOPICS.map(t=>`<option>${t}</option>`).join('');
+$('#plTp').innerHTML='<option value="همه">همهٔ موضوعات</option>'+TOPICS.map(t=>`<option>${t}</option>`).join('');
+})();
+let HARD_LV='همه';
+function filteredBank(){const bank=allWords();
+return bank.filter(x=>(FLT.lv==='همه'||x.lv===FLT.lv)&&(FLT.tp==='همه'||x.t===FLT.tp)&&
+(!FLT.star||state.star[x.w])&&(!FLT.q||x.w.toLowerCase().includes(FLT.q)||x.fa.includes(FLT.q)));}
+function applyFilter(){deck=PLAN_MODE?[...PLAN_MODE]:filteredBank();di=0;renderCard();WB_PAGE=1;renderWordGrid();}
+function cur(){return deck[di];}
+function statusBadge(w){if(isLearned(w.w)){const r=state.rep[w.w];
+return `<span class="st-badge g">✅ یادگرفته${r?' · تکرار '+REP_LABEL[r.s-1]:state.grad[w.w]?' · تثبیت 🏆':''}</span>`;}
+return isHard(w.w)?'<span class="st-badge r">❌ دشوار</span>':'';}
+function renderCard(){const box=$('#fcBox');box.classList.remove('flip','fg','fr');
+if(!deck.length){$('#fcWord').textContent='—';$('#fcFa').textContent='موردی یافت نشد';$('#fcTotal').textContent='۰';$('#fcIdx').textContent='۰';$('#fcBar').style.width='0%';$('#fcSt').innerHTML='';return;}
+setTimeout(()=>{const w=cur();state.seen[w.w]=1;save();
+$('#fcWord').textContent=w.w;$('#fcIpa').textContent=w.ipa||'';
+$('#fcFa').textContent=w.fa;$('#fcEx').textContent=w.ex||'';
+$('#fcLv').textContent=w.lv;$('#fcLv2').textContent=w.lv;$('#fcTp2').textContent=w.t;
+$('#fcLv').style.color=lvColor(w.lv);$('#fcLv2').style.color=lvColor(w.lv);
+$('#fcSt').innerHTML=statusBadge(w);
+$('#fcStar').textContent=state.star[w.w]?'⭐ نشان‌شده':'☆ نشان';$('#fcStar').classList.toggle('star-on',!!state.star[w.w]);
+$('#fcImgZone').innerHTML=state.images[w.w]?`<img src="${state.images[w.w]}">`:'<span class="ph">📷</span>';
+$('#pronFb').textContent='';
+$('#fcIdx').textContent=fa(di+1);$('#fcTotal').textContent=fa(deck.length);
+$('#fcKnown').textContent=fa(deck.filter(x=>isLearned(x.w)).length);
+$('#fcBar').style.width=(deck.length?(di+1)/deck.length*100:0)+'%';
+setTimeout(()=>speak(w.w),420);},box.classList.contains('flip')?350:0);}
+$('#fcBox').onclick=e=>{if(e.target.closest('button')||e.target.closest('.fc-img-zone'))return;$('#fcBox').classList.toggle('flip');};
+$('#btnNext').onclick=()=>{if(deck.length){di=(di+1)%deck.length;renderCard();}};
+$('#btnPrev').onclick=()=>{if(deck.length){di=(di-1+deck.length)%deck.length;renderCard();}};
+$('#btnShuffle').onclick=()=>{shuffle(deck);di=0;renderCard();toast('دستهٔ کارت‌ها درهم شد 🔀');};
+$('#fcSpeak').onclick=e=>{e.stopPropagation();if(cur())speak(cur().w);};
+$('#fcExSpeak').onclick=e=>{e.stopPropagation();if(cur()&&cur().ex)speak(cur().ex);};
+$('#fcImgZone').onclick=e=>{e.stopPropagation();const w=cur();if(!w)return;IMG_TARGET=w.w;$('#imgIn').click();};
+$('#fcStar').onclick=e=>{e.stopPropagation();const w=cur();if(!w)return;state.star[w.w]=state.star[w.w]?0:1;save();
+$('#fcStar').textContent=state.star[w.w]?'⭐ نشان‌شده':'☆ نشان';$('#fcStar').classList.toggle('star-on',!!state.star[w.w]);};
+$('#btnLearned').onclick=e=>{e.stopPropagation();const w=cur();if(!w)return;
+$('#fcBox').classList.add('fg');setLearned(w.w);toast('سبز شد ✅ و به چرخهٔ تکرار رفت 🔁');
+setTimeout(()=>{if(deck.length){di=(di+1)%deck.length;renderCard();}},650);};
+$('#btnNot').onclick=e=>{e.stopPropagation();const w=cur();if(!w)return;
+$('#fcBox').classList.add('fr');setHard(w.w);
+setTimeout(()=>{if(deck.length){di=(di+1)%deck.length;renderCard();}},650);};
+$('#fcMic').onclick=e=>{e.stopPropagation();const w=cur();if(!w)return;
+if(!SR)return toast('مرورگر شما تشخیص گفتار ندارد 🎤',1);
+const r=new SR();r.lang='en-US';r.interimResults=false;
+const btn=$('#fcMic');btn.classList.add('rec');$('#pronFb').textContent='🎧 گوش می‌دهم… صحبت کنید';$('#pronFb').style.color='var(--sky)';
+r.onresult=ev=>{const said=ev.results[0][0].transcript;const d=lev(said,w.w),score=Math.max(0,Math.round(100-d/Math.max(w.w.length,1)*100));
+$('#pronFb').innerHTML=`شنیدم: <b dir="ltr">${said}</b> — امتیاز: <span style="color:${score>70?'var(--teal)':'var(--coral)'}">${fa(score)}٪</span>`;
+if(score>75){addXP(3);toast('تلفظ عالی! +۳ امتیاز 🎉');}else speak(w.w);};
+r.onerror=()=>{$('#pronFb').textContent='صدایی دریافت نشد';$('#pronFb').style.color='var(--coral)';btn.classList.remove('rec');};
+r.onend=()=>btn.classList.remove('rec');r.start();};
+$('#planChip').onclick=()=>{PLAN_MODE=null;$('#planChip').style.display='none';applyFilter();toast('از حالت ویژه خارج شدید');};
+
+/* ═══════════ عکس ═══════════ */
+let IMG_TARGET=null;
+function uploadImgFor(w){IMG_TARGET=w;$('#imgIn').click();}
+$('#imgIn').onchange=e=>{const f=e.target.files[0];if(!f||!IMG_TARGET)return;
+compressImage(f,d=>{state.images[IMG_TARGET]=d;save();refreshAll();toast('عکس واژه ذخیره شد 🖼');});e.target.value='';};
+$('#fImg').onchange=e=>{const f=e.target.files[0];if(!f)return;
+compressImage(f,d=>{$('#fImgPrev').src=d;$('#fImgPrev').style.display='';$('#fImgPrev').dataset.d=d;});};
+
+/* ═══════════ باکس لغات ═══════════ */
+const WB_SIZE=18;let WB_PAGE=1,WB_QUERY='';
+function renderWordGrid(){const q=WB_QUERY.trim().toLowerCase();const list=filteredBank().filter(x=>!q||x.w.toLowerCase().includes(q)||String(x.fa||'').toLowerCase().includes(q));
+$('#wbCount').textContent=fa(list.length)+' واژه';
+$('#wbGrid').innerHTML=list.slice(0,WB_PAGE*WB_SIZE).map(w=>{
+const st=isLearned(w.w)?'st-learned':isHard(w.w)?'st-hard':'';
+const img=state.images[w.w]?`<img src="${state.images[w.w]}" alt="">`:'<span class="ph">🖼</span>';
+return `<div class="wcard ${st}">
+<div class="wimg" onclick="uploadImgFor('${w.w}')">${img}</div>
+<div class="wtx"><div class="ww" dir="ltr">${w.w}</div><div class="wf">${w.fa}</div>
+<div class="wm"><span style="color:${lvColor(w.lv)}">${w.lv}</span> · ${w.t} ${state.star[w.w]?'⭐':''}</div></div>
+<div class="wbts"><button class="icon-btn smi" onclick="speak('${w.w}')">🔊</button>
+<button class="wb ok" onclick="setLearned('${w.w}')">✅ یادگرفتم</button>
+<button class="wb no" onclick="setHard('${w.w}')">❌ یادنگرفتم</button><button class="wb no" onclick="deleteWord('${w.w}')">× حذف</button></div></div>`;}).join('');
+$('#wbMore').style.display=list.length>WB_PAGE*WB_SIZE?'':'none';}
+$('#wbMore').onclick=()=>{WB_PAGE++;renderWordGrid();};
+$('#wbSearch').addEventListener('input',e=>{WB_QUERY=e.target.value;WB_PAGE=1;renderWordGrid();});
+
+/* ═══════════ دشوارها ═══════════ */
+function renderHard(){let list=Object.keys(state.hard).map(findWord).filter(Boolean);
+if(HARD_LV!=='همه')list=list.filter(x=>x.lv===HARD_LV);
+$('#hardCount').textContent=fa(list.length);
+$('#hardEmpty').style.display=list.length?'none':'';
+$('#hardGrid').innerHTML=list.map(w=>`<div class="hcard">
+<div style="display:flex;gap:10px;align-items:center">
+${state.images[w.w]?`<img src="${state.images[w.w]}" style="width:46px;height:46px;border-radius:9px;object-fit:cover">`:'<span style="font-size:22px">🧱</span>'}
+<div><div dir="ltr" style="font-family:'Space Grotesk';font-weight:700">${w.w}</div>
+<div style="color:var(--gold);font-family:Lalezar;font-size:14px">${w.fa}</div>
+<div style="font-size:10.5px;color:var(--mut)"><span style="color:${lvColor(w.lv)}">${w.lv}</span> · ${w.t}</div></div>
+<button class="icon-btn smi" style="margin-inline-start:auto" onclick="speak('${w.w}')">🔊</button><button class="btn ghost sm" onclick="deleteWord('${w.w}')">× حذف</button></div>
+<button class="btn teal sm" style="width:100%;margin-top:11px;justify-content:center" onclick="hardLearned('${w.w}')">✅ یادگرفتم — برمی‌گردد به جای خودش</button></div>`).join('');}
+function hardLearned(w){setLearned(w);toast('آفرین! سبز شد و به جای خودش برگشت ✅');}
+function resetLevel(lv){if(!confirm('پیشرفت همهٔ واژه‌های سطح '+lv+' پاک شود؟ خود واژه‌ها حذف نمی‌شوند.'))return;const keys=allWords().filter(x=>x.lv===lv).map(x=>x.w);['learned','hard','seen','star','rep','grad'].forEach(k=>keys.forEach(w=>delete state[k][w]));save();applyFilter();refreshAll();toast('پیشرفت سطح '+lv+' بازنشانی شد');}
+function deleteWord(w){const wd=findWord(w);if(!wd||!confirm('واژهٔ «'+w+'» و وضعیت‌های آن حذف شود؟'))return;state.deletedWords=state.deletedWords||[];if(!state.deletedWords.includes(w))state.deletedWords.push(w);state.custom=state.custom.filter(x=>x.w!==w);['learned','hard','seen','star','images','rep','grad'].forEach(k=>delete state[k][w]);Object.values(state.plan).forEach(p=>{if(p.words)p.words=p.words.filter(x=>x!==w);});save();applyFilter();refreshAll();toast('واژه حذف شد');}
+$('#btnHardQuiz').onclick=()=>{const hw=Object.keys(state.hard).map(findWord).filter(Boolean);
+if(hw.length<4)return toast('حداقل ۴ واژهٔ دشوار لازم است',1);
+QUIZ_POOL=hw;$('#qPoolNote').style.display='';$('#qPoolNote').textContent='🔴 منبع آزمون: لغات دشوار شما ('+fa(hw.length)+' واژه)';
+location.hash='#quiz';};
+$('#btnHardCards').onclick=()=>{const hw=Object.keys(state.hard).map(findWord).filter(Boolean);
+if(!hw.length)return toast('باکس دشوارها خالی است 🎉');
+PLAN_MODE=hw;$('#planChip').style.display='';$('#planChip').textContent='🔴 تمرین دشوارها — خروج ✕';
+applyFilter();location.hash='#cards';};
+
+/* ═══════════ تکرار ═══════════ */
+let REP_LV='همه',repList=[],ri=0;
+function renderRepPanel(){const due=dueWords(REP_LV);
+$('#repDue').textContent=fa(due.length);
+const stageN=[1,2,3,4,5].map(s=>Object.values(state.rep).filter(r=>r.s===s).length);
+$('#repStages').innerHTML=stageN.map((n,i)=>`<div class="stg"><div class="stg-n">${fa(n)}</div>
+<div class="stg-k">مرحله ${fa(i+1)}</div><div class="stg-d">${REP_LABEL[i]}</div></div>`).join('')+
+`<div class="stg grad"><div class="stg-n">${fa(Object.keys(state.grad).length)}</div><div class="stg-k">تثبیت‌شده 🏆</div><div class="stg-d">خارج از چرخه</div></div>`;}
+$('#btnStartRep').onclick=()=>{repList=shuffle(dueWords(REP_LV));
+if(!repList.length){$('#repDone').style.display='';$('#repDoneTx').textContent='مروری باقی نمانده است.';return;}
+ri=0;$('#repRun').style.display='';$('#repStartRow').style.display='none';$('#repDone').style.display='none';renderRepCard();};
+function renderRepCard(){const w=repList[ri],r=state.rep[w.w]||{s:1};
+$('#repNum').textContent=`${fa(ri+1)} از ${fa(repList.length)} · ${w.lv}`;
+$('#repStg').textContent='مرحله '+fa(r.s)+' · '+REP_LABEL[r.s-1];
+$('#repWord').textContent=w.w;$('#repIpa').textContent=w.ipa||'';
+$('#repFa').textContent=w.fa;$('#repEx').textContent=w.ex||'';
+$('#repNext').textContent=r.s>=5?'با «یادم بود» این واژه تثبیت می‌شود 🏆':'با «یادم بود» مرور بعدی: '+REP_LABEL[r.s];
+$('#repAns').classList.remove('show');$('#repShowRow').style.display='';$('#repAnsBtns').style.display='none';
+speak(w.w);}
+$('#repSpeak').onclick=()=>{if(repList[ri])speak(repList[ri].w);};
+$('#repShow').onclick=()=>{$('#repAns').classList.add('show');$('#repShowRow').style.display='none';$('#repAnsBtns').style.display='';};
+$('#repOk').onclick=()=>{const w=repList[ri].w,r=state.rep[w];
+if(!r){repNext();return;}
+if(r.s>=5){state.grad[w]=1;delete state.rep[w];addXP(8);toast('🏆 تثبیت شد!');}
+else{scheduleRep(w,r.s+1);addXP(4);toast('⏩ مرور بعدی: '+REP_LABEL[r.s]);}
+save();repNext();};
+$('#repNo').onclick=()=>{const w=repList[ri].w;if(state.rep[w])scheduleRep(w,1);save();
+toast('🔁 فردا دوباره تکرار می‌شود');repNext();};
+function repNext(){ri++;renderRepPanel();
+if(ri>=repList.length){$('#repRun').style.display='none';$('#repStartRow').style.display='';
+$('#repDone').style.display='';$('#repDoneTx').textContent=`${fa(repList.length)} واژه مرور شد.`;refreshAll();return;}
+renderRepCard();}
+$('#repExit').onclick=()=>{$('#repRun').style.display='none';$('#repStartRow').style.display='';renderRepPanel();};
+
+/* ═══════════ برنامه‌ریز قابل تنظیم ═══════════ */
+let planDate=todayKey();
+function getPlan(d){return state.plan[d]||(state.plan[d]={words:[],note:''});}
+$('#cfgPer').value=state.planCfg.perDay;$('#cfgDays').value=String(state.planCfg.days);
+['cfgPer','cfgDays','cfgLv'].forEach(id=>$('#'+id).addEventListener('change',()=>{
+state.planCfg={perDay:+$('#cfgPer').value||10,days:+$('#cfgDays').value||7,lv:$('#cfgLv').value};save();}));
+$('#btnAutoPlan').onclick=()=>{const per=+$('#cfgPer').value||10,days=+$('#cfgDays').value||7,lv=$('#cfgLv').value;
+const planned=new Set();Object.values(state.plan).forEach(p=>(p.words||[]).forEach(w=>planned.add(w)));
+let pool=allWords().filter(x=>!isLearned(x.w)&&!planned.has(x.w)&&(lv==='همه'||x.lv===lv));
+pool=shuffle(pool);let made=0;
+for(let i=0;i<days;i++){const k=keyOf(new Date(Date.now()+i*864e5));const p=getPlan(k);
+const take=pool.filter(x=>!p.words.includes(x.w)).slice(0,per);
+if(take.length){p.words.push(...take.map(x=>x.w));made+=take.length;}}
+save();renderPlanner();
+toast(made?`⚙️ برنامهٔ خودکار: ${fa(made)} واژه در ${fa(days)} روز (${fa(per)} واژه/روز) چیده شد`:'واژهٔ آزادی برای چیدن نمانده',made?0:1);};
+$('#btnClearPlan').onclick=()=>{if(confirm('همهٔ برنامه‌های روزها پاک شود؟')){state.plan={};save();renderPlanner();toast('برنامه‌ها پاک شد 🗑');}};
+$('#planDate').onchange=e=>{planDate=e.target.value||todayKey();renderPlanner();};
+$('#planSearch').onkeydown=e=>{if(e.key!=='Enter')return;e.preventDefault();
+const q=e.target.value.trim();if(!q)return;const ql=q.toLowerCase();
+const w=allWords().find(x=>x.w.toLowerCase()===ql)||allWords().find(x=>x.w.toLowerCase().includes(ql)||x.fa.includes(q));
+if(!w)return toast('واژه‌ای پیدا نشد',1);
+const p=getPlan(planDate);if(p.words.includes(w.w))return toast('قبلاً در این برنامه هست');
+p.words.push(w.w);save();renderPlanner();e.target.value='';toast(`«${w.w}» به برنامه اضافه شد 📅`);};
+$('#planBulk').onclick=()=>{const lv=$('#plLv').value,tp=$('#plTp').value;
+let pool=allWords().filter(x=>(lv==='همه'||x.lv===lv)&&(tp==='همه'||x.t===tp)&&!isLearned(x.w));
+const p=getPlan(planDate);pool=shuffle(pool.filter(x=>!p.words.includes(x.w))).slice(0,5);
+if(!pool.length)return toast('واژهٔ جدیدی در این فیلتر نیست');
+p.words.push(...pool.map(x=>x.w));save();renderPlanner();toast(fa(pool.length)+' واژه به برنامه اضافه شد');};
+$('#planNote').oninput=e=>{getPlan(planDate).note=e.target.value;save();};
+function planRemove(w){const p=getPlan(planDate);p.words=p.words.filter(x=>x!==w);save();renderPlanner();}
+function planGo(k){planDate=k;renderPlanner();}
+function practicePlan(k){const p=state.plan[k];if(!p||!p.words.length)return;
+PLAN_MODE=p.words.map(findWord).filter(Boolean);
+$('#planChip').style.display='';$('#planChip').textContent='📅 حالت برنامه — خروج ✕';
+applyFilter();location.hash='#cards';}
+function renderPlanner(){
+$('#planDate').value=planDate;$('#cfgLv').value=state.planCfg.lv;
+const p=getPlan(planDate);
+$('#planNote').value=p.note||'';
+$('#planChips').innerHTML=p.words.length?p.words.map(w=>{const wd=findWord(w);
+return `<span class="chip on pchip" style="${isLearned(w)?'background:var(--green)':''}">${wd?wd.w:w}${isLearned(w)?' ✅':''} <b onclick="planRemove('${w}')">✕</b></span>`;}).join('')
+:'<span style="font-size:12.5px;color:var(--mut)">هنوز واژه‌ای در این روز نیست.</span>';
+$('#planMeta').textContent=p.words.length?`✨ ${fa(p.words.length)} واژه · ${fa(p.words.filter(isLearned).length)} انجام‌شده`:'';
+let html='';for(let i=0;i<7;i++){const d=new Date();d.setDate(d.getDate()+i);const k=keyOf(d);const pp=state.plan[k];
+html+=`<div class="plan-week-row ${i===0?'today':''}" onclick="planGo('${k}')">
+<span style="min-width:118px">${d.toLocaleDateString('fa-IR',{weekday:'long',day:'numeric',month:'long'})}</span>
+<span style="color:${pp&&pp.words.length?'var(--teal)':'var(--mut)'};font-size:12px">${pp&&pp.words.length?fa(pp.words.length)+' واژه':'—'}</span>
+${pp&&pp.note?'<span title="یادداشت دارد">📝</span>':''}
+<span style="margin-inline-start:auto;font-size:11px;color:var(--gold)">${i===0?'امروز':''}</span></div>`;}
+$('#planWeek').innerHTML=html;
+const tp=state.plan[todayKey()],tw=tp?tp.words:[];
+$('#todayPlan').innerHTML=tw.length?
+`<div style="font-size:13.5px;margin-bottom:10px">برنامهٔ امروز: <b style="color:var(--gold)">${fa(tw.length)}</b> واژه · انجام‌شده: <b style="color:var(--green)">${fa(tw.filter(isLearned).length)}</b></div>
+<button class="btn sm" onclick="practicePlan('${todayKey()}')">🚀 تمرین برنامهٔ امروز</button>`
+:'<div style="font-size:13px;color:var(--mut)">برنامه‌ای نیست؛ با «⚙️ تولید خودکار» بسازید. ✍️</div>';}
+
+/* ═══════════ آزمون + املا + نامحدود ═══════════ */
+let Q={list:[],i:0,score:0,miss:[],dir:'e2f',type:'mc',mode:'mc',timer:null};
+const normSpell=s=>(s||'').toLowerCase().trim().replace(/[^a-z]/g,'');
+$('#btnStartQuiz').onclick=()=>{
+const lv=$('#qLv').value,tp=$('#qTp').value,nv=$('#qN').value;Q.dir=$('#qDir').value;Q.type=$('#qType').value;
+let pool=QUIZ_POOL||allWords().filter(x=>(lv==='همه'||x.lv===lv)&&(tp==='همه'||x.t===tp));
+QUIZ_POOL=null;$('#qPoolNote').style.display='none';
+if(pool.length<4)return toast('حداقل ۴ واژه لازم است',1);
+const n=nv==='all'?pool.length:Math.min(+nv,pool.length);
+Q.list=shuffle([...pool]).slice(0,n);Q.i=0;Q.score=0;Q.miss=[];
+$('#quizSetup').style.display='none';$('#quizDone').style.display='none';$('#quizRun').style.display='block';
+$('#qOf').textContent=fa(Q.list.length);renderQ();};
+function renderQ(){const q=Q.list[Q.i];$('#qNum').textContent=fa(Q.i+1);$('#qScore').textContent=fa(Q.score);
+Q.mode=(Q.type==='spell')?'spell':(Q.type==='both')?(Q.i%2?'spell':'mc'):'mc';
+const wEl=$('#qWord');
+if(Q.mode==='spell'){
+wEl.textContent=q.fa;wEl.className='q-word fa-q';
+$('#qSub').textContent='🎧 املا: به تلفظ گوش دهید و املای انگلیسی را تایپ کنید';
+$('#qOpts').style.display='none';$('#spellBox').style.display='';
+$('#spellIn').value='';$('#spellIn').disabled=false;$('#spellBtn').disabled=false;$('#spellFb').textContent='';
+speak(q.w);
+}else{
+$('#spellBox').style.display='none';$('#qOpts').style.display='';
+const d=Q.dir==='mix'?(Q.i%2?'f2e':'e2f'):Q.dir;Q.curDir=d;
+if(d==='e2f'){wEl.textContent=q.w;wEl.className='q-word';speak(q.w);}else{wEl.textContent=q.fa;wEl.className='q-word fa-q';}
+$('#qSub').textContent=d==='e2f'?'معنی فارسی درست را انتخاب کنید':'واژهٔ انگلیسی درست را انتخاب کنید';
+const others=shuffle(allWords().filter(x=>x.w!==q.w)).slice(0,3);
+$('#qOpts').innerHTML=shuffle([q,...others]).map(o=>`<button class="opt" data-w="${o.w}">${d==='e2f'?o.fa:`<span dir="ltr" style="font-family:'Space Grotesk'">${o.w}</span>`}</button>`).join('');
+document.querySelectorAll('#qOpts .opt').forEach(b=>b.onclick=()=>answer(b,q));}
+startTimer();}
+function startTimer(){clearTimeout(Q.timer);const b=$('#qBar');b.style.transition='none';b.style.width='100%';void b.offsetWidth;
+b.style.transition='width 20s linear';b.style.width='0%';
+Q.timer=setTimeout(()=>{if(Q.mode==='spell')spellResult(false,true);else answer(null,Q.list[Q.i]);},20000);}
+function answer(btn,q){clearTimeout(Q.timer);const isOk=btn&&btn.dataset.w===q.w;
+document.querySelectorAll('#qOpts .opt').forEach(b=>{b.disabled=true;if(b.dataset.w===q.w)b.classList.add('ok');});
+if(isOk){Q.score++;addXP(10);state.seen[q.w]=1;}else{if(btn)btn.classList.add('bad');Q.miss.push(q);if(!btn)toast('وقت تمام شد! ⏰');}
+setTimeout(()=>{Q.i++;Q.i<Q.list.length?renderQ():finishQuiz();},900);}
+$('#spellSpeak').onclick=()=>{if(Q.list[Q.i])speak(Q.list[Q.i].w);};
+$('#spellBtn').onclick=()=>spellResult(null,false);
+$('#spellIn').addEventListener('keydown',e=>{if(e.key==='Enter'&&!$('#spellBtn').disabled)spellResult(null,false);});
+function spellResult(forced,timeout){if($('#spellBtn').disabled)return;clearTimeout(Q.timer);
+const q=Q.list[Q.i];const ok=forced===false?false:normSpell($('#spellIn').value)===normSpell(q.w);
+$('#spellIn').disabled=true;$('#spellBtn').disabled=true;
+$('#spellFb').innerHTML=ok?`✅ درست! <b dir="ltr">${q.w}</b>`:`❌ درستِ آن: <b dir="ltr">${q.w}</b>${timeout?' (وقت تمام شد ⏰)':''}`;
+$('#spellFb').style.color=ok?'var(--teal)':'var(--coral)';
+if(ok){Q.score++;addXP(10);state.seen[q.w]=1;}else Q.miss.push(q);
+$('#qScore').textContent=fa(Q.score);
+setTimeout(()=>{Q.i++;Q.i<Q.list.length?renderQ():finishQuiz();},1100);}
+function finishQuiz(){const pct=Math.round(Q.score/Q.list.length*100);
+$('#quizRun').style.display='none';$('#quizDone').style.display='block';
+state.quiz.n++;state.quiz.ok+=Q.score;state.quiz.all+=Q.list.length;touchDay();save();
+setTimeout(()=>{$('#resRingFg').setAttribute('stroke-dasharray',pct+' 100');$('#resRingTx').textContent=fa(pct)+'٪';},80);
+$('#resTx').textContent=pct>=80?'🏆 عالی بود!':pct>=50?'👍 خوب بود، ادامه بده!':'💪 نیاز به تمرین بیشتر';
+$('#resXp').textContent=`${fa(Q.score)} پاسخ درست از ${fa(Q.list.length)} · +${fa(Q.score*10)} امتیاز`;
+$('#missList').innerHTML=Q.miss.length?'<div style="font-size:13px;color:var(--mut)">واژه‌های خطا رفته (🧱 = انتقال به دشوارها):</div>'+
+Q.miss.map(m=>`<div class="miss"><span class="e">${m.w}</span><span class="f">${m.fa}</span>
+<span style="display:flex;gap:6px"><button class="icon-btn smi" onclick="speak('${m.w}')">🔊</button>
+<button class="icon-btn smi" title="انتقال به دشوارها" onclick="setHard('${m.w}')">🧱</button></span></div>`).join('')
+:'<div style="text-align:center;color:var(--teal);font-size:14px">هیچ خطایی نداشتید! 🌟</div>';
+refreshAll();}
+$('#btnRetry').onclick=()=>$('#btnStartQuiz').click();
+$('#btnToCards').onclick=()=>{location.hash='#cards';};
+
+/* ═══════════ گرامر + آپلود متن/فیلم ═══════════ */
+window.accT=h=>{const acc=h.closest('.acc'),b=acc.querySelector('.acc-b');
+acc.classList.toggle('open');b.style.maxHeight=acc.classList.contains('open')?b.scrollHeight+'px':null;};
+function renderGrammar(){$('#gramList').innerHTML=GRAMMAR.map((g,i)=>`<div class="acc" id="acc${i}">
+<div class="acc-h" onclick="accT(this)"><span class="lv-badge" style="background:${lvColor(g.lv)}">${g.lv}</span><span class="tt">${g.tt}</span><span class="ar">▼</span></div>
+<div class="acc-b"><div class="acc-b-in">${g.body}${g.ex.map(e=>`<div class="g-ex"><button class="icon-btn smi" onclick="speak(\`${e[0]}\`)">🔊</button><span class="e" dir="ltr">${e[0]}</span><span class="f">${e[1]}</span></div>`).join('')}</div></div></div>`).join('');
+$('#gramCustom').innerHTML=state.gramText.map((g,i)=>`<div class="acc">
+<div class="acc-h" onclick="accT(this)"><span class="lv-badge" style="background:var(--teal)">✍️</span><span class="tt">${esc(g.tt)}</span>
+<span style="margin-inline-start:6px;color:var(--coral);cursor:pointer" onclick="event.stopPropagation();delGram(${i})">🗑</span><span class="ar">▼</span></div>
+<div class="acc-b"><div class="acc-b-in">${g.body}</div></div></div>`).join('');}
+function delGram(i){state.gramText.splice(i,1);save();renderGrammar();toast('درس متنی حذف شد');}
+let VID=[]; /* فیلم‌ها فقط در همین جلسه */
+function renderVids(){$('#gramVids').innerHTML=VID.map((v,i)=>`<div class="g-vid">
+<div style="display:flex;align-items:center;gap:8px"><b style="font-family:Lalezar;font-size:16px">🎬 ${esc(v.tt)}</b>
+<span style="margin-inline-start:auto;color:var(--coral);cursor:pointer" onclick="VID.splice(${i},1);renderVids()">🗑</span></div>
+<video controls src="${v.url}"></video></div>`).join('');}
+$('#gramDrop').onclick=()=>$('#gramFile').click();
+$('#gramDrop').ondragover=e=>{e.preventDefault();$('#gramDrop').classList.add('over');};
+$('#gramDrop').ondragleave=()=>$('#gramDrop').classList.remove('over');
+$('#gramDrop').ondrop=e=>{e.preventDefault();$('#gramDrop').classList.remove('over');if(e.dataTransfer.files[0])gramHandle(e.dataTransfer.files[0]);};
+$('#gramFile').onchange=e=>{if(e.target.files[0])gramHandle(e.target.files[0]);e.target.value='';};
+function gramHandle(f){const n=f.name.toLowerCase();
+if(/\.(mp4|webm|mov|m4v)$/.test(n)){VID.push({tt:f.name,url:URL.createObjectURL(f)});renderVids();
+toast('🎬 فیلم اضافه شد — در همین جلسه قابل پخش است');return;}
+const r=new FileReader();r.onload=()=>{const txt=String(r.result||'');const lines=txt.split(/\r?\n/);
+const tt=(lines[0]||f.name).slice(0,70);const body=esc(lines.slice(1).join('\n')||txt).replace(/\n/g,'<br>');
+state.gramText.push({tt, body});save();renderGrammar();toast('📄 درس متنی «'+esc(tt)+'» اضافه شد');};
+r.readAsText(f,'utf-8');}
+$('#gAdd').onclick=()=>{const tt=$('#gTitle').value.trim(),bd=$('#gBody').value.trim();
+if(!tt||!bd)return toast('عنوان و متن درس را بنویسید',1);
+state.gramText.push({tt,body:esc(bd).replace(/\n/g,'<br>')});save();
+$('#gTitle').value='';$('#gBody').value='';renderGrammar();toast('درس متنی اضافه شد ✍️');};
+
+/* ═══════════ آمار ═══════════ */
+function drawWeekly(){const cv=$('#weeklyCv'),wrap=cv.parentElement,dpr=devicePixelRatio||1;
+const W=wrap.clientWidth-44,H=230;cv.width=W*dpr;cv.height=H*dpr;cv.style.width=W+'px';cv.style.height=H+'px';
+const c=cv.getContext('2d');c.setTransform(dpr,0,0,dpr,0,0);c.clearRect(0,0,W,H);
+const days=[...Array(7)].map((_,i)=>{const d=new Date(Date.now()-(6-i)*864e5);
+return{key:keyOf(d),lbl:d.toLocaleDateString('fa-IR',{weekday:'short'})};});
+const vals=days.map(d=>state.history[d.key]||0),max=Math.max(10,...vals);
+c.strokeStyle='rgba(233,244,244,.07)';
+for(let i=0;i<=4;i++){const y=H-30-(H-70)*i/4;c.beginPath();c.moveTo(10,y);c.lineTo(W-10,y);c.stroke();}
+const bw=W/7;c.textAlign='center';
+days.forEach((d,i)=>{const v=vals[i],h=(H-70)*v/max,x=i*bw+bw/2,y=H-30-h;
+c.fillStyle=v?'#ffb84d':'rgba(233,244,244,.12)';
+c.beginPath();if(c.roundRect)c.roundRect(x-13,v?y:H-34,26,v?h:4,6);else c.rect(x-13,v?y:H-34,26,v?h:4);c.fill();
+if(v){c.fillStyle='#e9f4f4';c.font='bold 12px Vazirmatn';c.fillText(fa(v),x,y-7);}
+c.fillStyle='#5d8494';c.font='11px Vazirmatn';c.fillText(d.lbl,x,H-10);});}
+function drawTopics(){const bank=allWords();
+$('#topicBars').innerHTML=TOPICS.map(t=>{const list=bank.filter(x=>x.t===t),k=list.filter(x=>isLearned(x.w)).length;
+const p=list.length?Math.round(k/list.length*100):0;
+return `<div class="lvrow"><span style="min-width:76px;font-size:13px">${t}</span>
+<div class="bar"><i style="width:${p}%;background:linear-gradient(90deg,var(--pink),var(--amber))"></i></div>
+<span class="lv-count">${fa(k)} / ${fa(list.length)}</span></div>`;}).join('');}
+function drawStatsDonut(){const{L,H,SE,R}=drawStatusDonut($('#donutCv'),185);
+$('#lgKnown').textContent=fa(L);$('#lgHard').textContent=fa(H);$('#lgSeen').textContent=fa(SE);$('#lgRest').textContent=fa(R);}
+let rsz;addEventListener('resize',()=>{clearTimeout(rsz);rsz=setTimeout(()=>{drawWeekly();drawStatsDonut();drawSummary();drawLevelDonuts();},200);});
+
+/* ═══════════ درون‌ریزی ═══════════ */
+if(window.pdfjsLib)pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+$('#addForm').addEventListener('submit',e=>{e.preventDefault();
+const form=e.currentTarget,w=$('#fW').value.trim(),fa=$('#fFa').value.trim();
+if(!w||!fa){form.reportValidity();return;}
+if(allWords().some(x=>normW(x.w)===normW(w))){toast('🧹 لغت تکراری است — خودکار نادیده گرفته شد');return;}
+const d=$('#fImgPrev').dataset.d||'';
+state.custom.push({w,fa,lv:$('#fLv').value,t:$('#fTp').value,ipa:$('#fIpa').value.trim(),ex:$('#fEx').value.trim()});
+if(d)state.images[w]=d;
+save();form.reset();$('#fImgPrev').style.display='none';$('#fImgPrev').removeAttribute('src');delete $('#fImgPrev').dataset.d;
+WB_PAGE=1;applyFilter();refreshAll();toast('واژه اضافه و ذخیره شد ✅');});
+$('#directWordAdd').addEventListener('click',e=>{e.preventDefault();const target=$('#addForm');target.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(()=>$('#fW').focus({preventScroll:true}),350);});
+function normLv(l){l=(l||'').toUpperCase();return lvIds().includes(l)?l:'B1';}
+function smartSplit(line){
+const lv=(line.match(/\b([ABC][12])\b/i)||[])[1];
+const en=(line.match(/[A-Za-z][A-Za-z'’\- ]{1,40}[A-Za-z]|[A-Za-z]{2,}/)||[])[0];
+const faM=(line.match(/[\u0600-\u06FF][\u0600-\u06FF\u200c\s]{0,40}[\u0600-\u06FF]/)||[])[0];
+if(en&&faM)return{w:en.trim(),fa:faM.trim().replace(/\s+/g,' '),lv:lv?lv.toUpperCase():null};
+return null;}
+function commitRows(rows){let added=0,dupes=0;
+const base=new Set(allWords().map(x=>normW(x.w)));
+rows.forEach(o=>{const k=normW(o.w);if(!k||!o.fa)return;
+if(base.has(k)){dupes++;return;}base.add(k);state.custom.push(o);added++;});
+return{added,dupes};}
+async function parseSheet(f){
+if(!window.XLSX){toast('کتابخانهٔ اکسل بارگیری نشده — فایل را CSV کنید',1);return[];}
+const wb=XLSX.read(await f.arrayBuffer(),{type:'array'});const rows=[];
+wb.SheetNames.forEach(sn=>{const data=XLSX.utils.sheet_to_json(wb.Sheets[sn],{header:1,defval:''});
+data.forEach((r,idx)=>{const cells=r.map(c=>String(c??'').trim()).filter(Boolean);
+if(!cells.length)return;
+if(idx===0&&cells.length>1&&/word|english|لغت|واژه|کلمه|معنی/i.test(cells.join(' ')))return;
+if(cells.length>=2)rows.push({w:cells[0],fa:cells[1],lv:normLv(cells[2]),t:TOPICS.includes(cells[3])?cells[3]:'روزمره',ipa:cells[4]||'',ex:cells[5]||''});
+else{const sm=smartSplit(cells[0]);if(sm)rows.push({w:sm.w,fa:sm.fa,lv:normLv(sm.lv),t:'روزمره',ipa:'',ex:''});}});});
+return rows;}
+async function parsePdf(f){
+if(!window.pdfjsLib){toast('کتابخانهٔ PDF بارگیری نشده',1);return[];}
+const pdf=await pdfjsLib.getDocument({data:await f.arrayBuffer()}).promise;let text='';
+for(let p=1;p<=pdf.numPages;p++){const page=await pdf.getPage(p);const tc=await page.getTextContent();
+const lines={};tc.items.forEach(it=>{const y=Math.round(it.transform[5]);(lines[y]=lines[y]||[]).push({x:it.transform[4],s:it.str});});
+Object.keys(lines).sort((a,b)=>b-a).forEach(y=>{text+=lines[y].sort((a,b)=>a.x-b.x).map(i=>i.s).join(' ')+'\n';});}
+return parseFreeText(text);}
+async function parseDocx(f){
+if(!window.mammoth){toast('کتابخانهٔ Word بارگیری نشده',1);return[];}
+const res=await mammoth.extractRawText({arrayBuffer:await f.arrayBuffer()});
+return parseFreeText(res.value||'');}
+function parseFreeText(text){const rows=[];
+text.split(/\r?\n/).forEach(line=>{const sm=smartSplit(line);
+if(sm)rows.push({w:sm.w,fa:sm.fa,lv:normLv(sm.lv),t:'روزمره',ipa:'',ex:''});});
+return rows;}
+function parseJsonText(text){let j;try{j=JSON.parse(text)}catch(e){toast('فایل JSON معتبر نیست',1);return[];}
+const arr=Array.isArray(j)?j:(j.words||[]);
+return arr.map(r=>({w:String(r.w||r.word||r.en||'').trim(),fa:String(r.fa||r.meaning||r.translate||''),
+lv:normLv(r.lv||r.level),t:TOPICS.includes(r.t||r.topic)?(r.t||r.topic):'روزمره',ipa:r.ipa||'',ex:r.ex||r.example||''})).filter(r=>r.w);}
+function parseXml(text){const rows=[];
+const re=/<\s*(?:word|w|en|english)[^>]*>\s*([^<]+?)\s*<\/[^>]+>\s*<\s*(?:fa|meaning|translate|persian)[^>]*>\s*([^<]+?)\s*<\/[^>]+>/gi;
+let m;while((m=re.exec(text)))rows.push({w:m[1].trim(),fa:m[2].trim(),lv:'B1',t:'روزمره',ipa:'',ex:''});
+return rows.length?rows:parseFreeText(text.replace(/<[^>]+>/g,' '));}
+function parseDelimited(text){const lines=text.split(/\r?\n/).filter(l=>l.trim());
+if(!lines.length)return[];
+const dl=lines[0].includes('\t')?'\t':(lines[0].split(';').length>lines[0].split(',').length?';':',');
+let start=(lines[0].split(dl).length>1&&/word|واژه|لغت/i.test(lines[0]))?1:0;
+const rows=[];
+for(let i=start;i<lines.length;i++){
+const p=lines[i].split(dl).map(s=>s.trim().replace(/^"|"$/g,'')).filter(s=>s);
+if(!p.length)continue;
+if(p.length>=2)rows.push({w:p[0],fa:p[1],lv:normLv(p[2]),t:TOPICS.includes(p[3])?p[3]:'روزمره',ipa:p[4]||'',ex:p[5]||''});
+else{const sm=smartSplit(lines[i]);if(sm)rows.push({w:sm.w,fa:sm.fa,lv:normLv(sm.lv),t:'روزمره',ipa:'',ex:''});}}
+return rows;}
+async function handleFile(f){
+const name=f.name.toLowerCase();
+try{let rows=[];
+if(/\.(xlsx|xls|ods)$/.test(name))rows=await parseSheet(f);
+else if(/\.pdf$/.test(name))rows=await parsePdf(f);
+else if(/\.docx$/.test(name))rows=await parseDocx(f);
+else if(/\.doc$/.test(name)){toast('فرمت ‎.doc پشتیبانی نمی‌شود — ‎.docx ذخیره کنید',1);return;}
+else{const text=await f.text();
+if(/\.json$/.test(name))rows=parseJsonText(text);
+else if(/\.xml$/.test(name))rows=parseXml(text);
+else if(/\.ya?ml$/.test(name))rows=parseFreeText(text);
+else rows=parseDelimited(text);}
+const forceLv=$('#impLv').value;
+if(forceLv!=='auto')rows.forEach(r=>r.lv=forceLv);
+const{added,dupes}=commitRows(rows);
+dedupeBank(true);
+if(added||dupes){save();applyFilter();refreshAll();
+let msg=added?`${fa(added)} واژه از «${esc(f.name)}» درون‌ریزی شد 📂${forceLv!=='auto'?' — سطح '+forceLv:''}`:'واژهٔ جدیدی یافت نشد';
+if(dupes)msg+=` · ${fa(dupes)} تکراری حذف شد 🧹`;
+toast(msg);}
+else toast('واژه‌ای تشخیص داده نشد',1);
+}catch(e){toast('خطا در خواندن فایل: '+e.message,1);}}
+const dz=$('#dropZone'),fi=$('#fileIn');
+dz.onclick=()=>fi.click();
+dz.ondragover=e=>{e.preventDefault();dz.classList.add('over');};
+dz.ondragleave=()=>dz.classList.remove('over');
+dz.ondrop=e=>{e.preventDefault();dz.classList.remove('over');if(e.dataTransfer.files[0])handleFile(e.dataTransfer.files[0]);};
+fi.onchange=()=>{if(fi.files[0])handleFile(fi.files[0]);fi.value='';};
+
+/* ═══════════ افزودن گروهی ═══════════ */
+$('#bulkText').addEventListener('input',e=>{
+$('#bulkCount').textContent=fa(e.target.value.split(/\r?\n/).filter(l=>l.trim()).length)+' خط';});
+$('#btnBulkAdd').onclick=()=>{
+const text=$('#bulkText').value.trim();
+if(!text)return toast('لیست واژه‌ها خالی است',1);
+const lv=$('#bulkLv').value,tp=$('#bulkTp').value,autoLv=$('#bulkAutoLv').checked;
+const rows=[];
+text.split(/\r?\n/).map(l=>l.trim()).filter(Boolean).forEach(line=>{
+const sm=smartSplit(line);
+const lineLv=autoLv&&sm&&sm.lv&&lvIds().includes(sm.lv)?sm.lv:lv;
+const p=line.split(/\t|,|;|=/).map(s=>s.trim()).filter(Boolean);
+if(p.length>=2&&/[A-Za-z]/.test(p[0])&&/[\u0600-\u06FF]/.test(p[1]))rows.push({w:p[0],fa:p[1],lv:lineLv,t:tp,ipa:'',ex:''});
+else if(sm)rows.push({w:sm.w,fa:sm.fa,lv:lineLv,t:tp,ipa:'',ex:''});
+else if(/[A-Za-z]/.test(line)){const w=line.replace(/[^\w'’\- ]/g,'').trim();if(w)rows.push({w,fa:w,lv,t:tp,ipa:'',ex:''});}});
+if(!rows.length)return toast('واژهٔ معتبری پیدا نشد',1);
+const{added,dupes}=commitRows(rows);
+if(added){save();applyFilter();refreshAll();$('#bulkText').value='';$('#bulkCount').textContent='۰ خط';}
+let msg=added?`${fa(added)} واژه با سطح <b style="color:${lvColor(lv)}">${lv}</b> اضافه شد ✅`:'واژهٔ جدیدی نبود';
+if(dupes)msg+=` · ${fa(dupes)} تکراری حذف شد 🧹`;
+toast(msg,added?0:1);};
+
+$('#btnExpJson').onclick=()=>{const blob=new Blob([JSON.stringify(state.custom,null,1)],{type:'application/json'});
+const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='my-words.json';a.click();toast('خروجی JSON دانلود شد ⬇');};
+$('#btnDedupe').onclick=()=>{const n=dedupeBank(false);
+if(n===0)toast('هیچ لغت تکراری نیست ✨');else{applyFilter();refreshAll();}};
+$('#btnTpl').onclick=()=>{const tpl=[{w:'example',fa:'نمونه',lv:'A1',topic:'روزمره',ipa:'/ɪɡˈzɑːm.pəl/',example:'This is an example sentence.'}];
+const blob=new Blob([JSON.stringify(tpl,null,1)],{type:'application/json'});
+const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='word-template.json';a.click();};
+$('#btnReset').onclick=()=>{if(confirm('تمام پیشرفت پاک شود؟')){localStorage.removeItem(LS);location.reload();}};
+
+let dirHandle=null;
+$('#btnFolder').onclick=async()=>{
+if(!window.showDirectoryPicker)return toast('اتصال پوشه در این مرورگر نیست — Chrome/Edge',1);
+try{dirHandle=await showDirectoryPicker({mode:'readwrite'});
+$('#folderName').innerHTML='📁 پوشه متصل: <b style="color:var(--teal)">'+dirHandle.name+'</b>';
+$('#folderBox').classList.add('connected');
+await writeFolder();toast('پوشه وصل شد 📁');}catch(e){console.error('Folder connection/initial backup failed:',e);$('#folderBox').classList.remove('connected');toast(e.name==='AbortError'?'اتصال پوشه لغو شد.':'خطا در اتصال/ذخیرهٔ پوشه: '+(e.message||e),1);}};
+async function writeFolder(){if(!dirHandle)return;try{
+const f=await dirHandle.getFileHandle('vazhesanj-backup.json',{create:true});
+const ws=await f.createWritable();await ws.write(JSON.stringify(state,null,1));await ws.close();
+$('#folderLast').textContent='✓ آخرین ذخیره در پوشه: '+new Date().toLocaleTimeString('fa-IR');return true;}catch(e){console.error('Folder backup write failed:',e);$('#folderLast').textContent='خطا در ذخیرهٔ پوشه: '+(e.message||e);toast('ذخیرهٔ پشتیبان در پوشه ناموفق بود: '+(e.message||e),1);throw e;}}
+$('#btnFolderSave').onclick=async()=>{if(!dirHandle)return toast('اول پوشه انتخاب کنید',1);try{await writeFolder();toast('پشتیبان ذخیره شد 💾');}catch(e){console.error('Manual folder backup failed:',e);}};
+$('#btnFolderImgs').onclick=async()=>{if(!dirHandle)return toast('اول پوشه انتخاب کنید',1);
+const imgs=Object.entries(state.images);if(!imgs.length)return toast('عکسی نیست');
+try{const sub=await dirHandle.getDirectoryHandle('images',{create:true});
+for(const[w,d]of imgs){const f=await sub.getFileHandle(w.replace(/[^\w-]/g,'_')+'.jpg',{create:true});
+const ws=await f.createWritable();await ws.write(await(await fetch(d)).blob());await ws.close();}
+toast(fa(imgs.length)+' عکس ذخیره شد 🖼');}catch(e){toast('خطا در ذخیرهٔ عکس',1);}};
+
+/* ═══════════ چت ═══════════ */
+const chatBody=$('#chatBody');
+function botMsg(html){const d=document.createElement('div');d.className='msg bot';d.innerHTML=html;chatBody.appendChild(d);chatBody.scrollTop=chatBody.scrollHeight;return d;}
+function userMsg(t){const d=document.createElement('div');d.className='msg user';d.textContent=t;chatBody.appendChild(d);chatBody.scrollTop=chatBody.scrollHeight;}
+function botThink(html){const d=botMsg('<span class="typing"><i></i><i></i><i></i></span>');
+setTimeout(()=>{d.innerHTML=html;chatBody.scrollTop=chatBody.scrollHeight;},550+Math.random()*500);}
+function aiThink(raw){const t=raw.trim(),low=t.toLowerCase();
+for(const wd of allWords()){if(low.includes(wd.w.toLowerCase())&&wd.w.length>1)
+return `معنی <span class="mw">${wd.w}</span> یعنی:<br><span class="mf">${wd.fa}</span><br>
+<button class="chip" onclick="speak('${wd.w}')">🔊 تلفظ</button> <span style="color:var(--mut);font-size:11px">· ${wd.lv} · ${wd.t}</span>`;}
+if(/سلام|درود|hi|hello/.test(low))return `سلام! 👋 بپرسید: «تکرار امروز»، «یه کلمه یاد بده»، «آزمون املا»، «دشوارهام» یا «پیشرفتم چطوره؟»`;
+if(/املا/.test(low)){setTimeout(()=>{$('#qType').value='spell';location.hash='#quiz';},600);return '🎧 حالت املا آماده شد! در بخش آزمون «شروع» را بزنید.';}
+if(/تکرار|مرور|لایتنر/.test(low)){const due=dueWords(null).length;
+setTimeout(()=>{location.hash='#repeat';},600);
+return due?`🔁 <b>${fa(due)}</b> واژه منتظر مرور است!`:'🎉 مروری باقی نمانده!';}
+if(/دشوار|سخت/.test(low)){const h=Object.keys(state.hard);
+return h.length?`🧱 <b>${fa(h.length)}</b> واژهٔ دشوار:<br><span dir="ltr" style="color:var(--coral)">${h.slice(0,10).join(', ')}</span>`:'دشواری ندارید! 🎉';}
+if(/آزمون|کوییز|quiz/.test(low)){setTimeout(()=>{location.hash='#quiz';},600);return '📝 به بخش آزمون رفتم.';}
+if(/گرامر/.test(low)){setTimeout(()=>{location.hash='#grammar';},600);return '📚 کارگاه گرامر + آپلود متن/فیلم آماده است.';}
+if(/پیشرفت|آمار|وضعیت/.test(low)){const{total,L,H}=statusCounts();
+return `📊 کل: <b>${fa(total)}</b> · یادگرفتم: <b style="color:#3ddc84">${fa(L)}</b> · دشوار: <b style="color:var(--coral)">${fa(H)}</b> · زنجیره: <b>${fa(state.streak)} روز</b> 🔗`;}
+if(/کلمه|واژه|یاد بده|تصادفی/.test(low)){const w=allWords()[Math.floor(Math.random()*allWords().length)];
+setTimeout(()=>speak(w.w),700);return `🎁 <span class="mw" style="font-size:20px">${w.w}</span><br><span class="mf">${w.fa}</span>`;}
+return `کمک:<br>
+<button class="chip" onclick="chatAsk('تکرار امروز')">🔁 تکرار</button>
+<button class="chip" onclick="chatAsk('آزمون املا')">🎧 املا</button>
+<button class="chip" onclick="chatAsk('دشوارهام')">🧱 دشوارها</button>`;}
+function sendChat(t){if(!t)return;userMsg(t);botThink(aiThink(t));}
+$('#chatSend').onclick=()=>{sendChat($('#chatIn').value);$('#chatIn').value='';};
+$('#chatIn').onkeydown=e=>{if(e.key==='Enter')$('#chatSend').click();};
+$('#chatFab').onclick=()=>$('#chatPanel').classList.toggle('open');
+$('#chatClose').onclick=()=>$('#chatPanel').classList.remove('open');
+window.chatAsk=t=>sendChat(t);
+['تکرار امروز','آزمون املا','یه کلمه یاد بده','دشوارهام'].forEach(q=>{
+const b=document.createElement('button');b.className='chip';b.textContent=q;b.onclick=()=>sendChat(q);$('#chatQuick').appendChild(b);});
+$('#chatMic').onclick=()=>{if(!SR)return toast('تشخیص گفتار نیست',1);
+const r=new SR();r.lang='fa-IR';const btn=$('#chatMic');btn.classList.add('rec');
+r.onresult=e=>{$('#chatIn').value=e.results[0][0].transcript;sendChat($('#chatIn').value);$('#chatIn').value='';};
+r.onend=()=>btn.classList.remove('rec');r.onerror=()=>{btn.classList.remove('rec');};r.start();};
+botMsg(`سلام! 👋 من <b>واژه‌یار</b> هستم. ✨`);
+
+/* ═══════════ ناوبری/سراسری ═══════════ */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+const secs=[...document.querySelectorAll('section[id]')];
+addEventListener('scroll',()=>{const y=scrollY+150;let cur='dash';
+secs.forEach(s=>{if(s.offsetTop<=y&&s.id!=='summary')cur=s.id;});
+document.querySelectorAll('nav a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+cur));},{passive:true});
+function refreshAll(){updateGauge();updateBattery();updateTiles();drawSummary();drawChain();renderLevelHubs();drawLevelDonuts();
+renderWordGrid();renderHard();renderRepPanel();renderPlanner();drawWeekly();drawStatsDonut();drawTopics();
+if(deck.length&&cur())$('#fcSt').innerHTML=statusBadge(cur().w);}
+buildLevelControls();renderGrammar();renderVids();
+touchDay();save();stampSave();applyFilter();refreshAll();
+setTimeout(()=>{updateGauge();updateBattery();drawSummary();drawLevelDonuts();},400);
+</script>
+
+<script>
+(()=>{
+  const KEY='ielts-master-api:v1';
+  const byId=id=>document.getElementById(id);
+  const els={url:byId('apiBaseUrl'),key:byId('apiKey'),enabled:byId('apiEnabled'),badge:byId('apiStatus'),message:byId('apiMessage'),profile:byId('apiProfile'),words:byId('apiWords'),last:byId('apiLastSync')};
+  const safeRead=()=>{try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch(_){return {}}};
+  let cfg=safeRead();
+  els.url.value=cfg.baseUrl||'';els.key.value=cfg.apiKey||'';els.enabled.checked=!!cfg.enabled;
+  function persist(){cfg={baseUrl:els.url.value.trim().replace(/\/+$/,''),apiKey:els.key.value.trim(),enabled:els.enabled.checked,lastSync:cfg.lastSync||null};try{localStorage.setItem(KEY,JSON.stringify(cfg));return true}catch(e){setStatus('err','خطا');setMessage('ذخیره‌سازی مرورگر در دسترس نیست: '+e.message,true);return false}}
+  function setStatus(kind,label){els.badge.className='api-badge '+kind;els.badge.textContent='● '+label}
+  function setMessage(text,error=false){els.message.textContent=text;els.message.style.color=error?'#bd4337':''}
+  function base(){const v=els.url.value.trim().replace(/\/+$/,'');if(!v)throw Error('ابتدا API Base URL را وارد کنید.');let u;try{u=new URL(v)}catch(_){throw Error('نشانی API معتبر نیست.')}if(!['http:','https:'].includes(u.protocol))throw Error('فقط نشانی HTTP یا HTTPS مجاز است.');if(location.protocol==='https:'&&u.protocol==='http:')throw Error('از صفحهٔ HTTPS نمی‌توان به API ناامن HTTP درخواست فرستاد.');return v}
+  function headers(json=true){const h={Accept:'application/json'};if(json)h['Content-Type']='application/json';const k=els.key.value.trim();if(k){h.Authorization='Bearer '+k;h['X-API-Key']=k}return h}
+  async function request(path,opts={}){const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),15000);try{const response=await fetch(base()+path,{...opts,headers:{...headers(opts.method!=='GET'),...(opts.headers||{})},signal:controller.signal,mode:'cors',credentials:'omit'});const text=await response.text();let data=null;if(text){try{data=JSON.parse(text)}catch(_){data={message:text.slice(0,500)}}}if(!response.ok){const detail=data&&(data.message||data.error);throw Error('HTTP '+response.status+(detail?' — '+detail:''))}return data}finally{clearTimeout(timer)}}
+  function refreshMeta(){try{els.profile.textContent=window.activeUsername||localStorage.getItem('vazhesanj-v4:active')||'پیش‌فرض';els.words.textContent=(window.state&&Array.isArray(window.state.custom)?window.state.custom.length:0).toLocaleString('fa-IR');els.last.textContent=cfg.lastSync?new Date(cfg.lastSync).toLocaleString('fa-IR'):'هنوز انجام نشده'}catch(_){}}
+  els.url.addEventListener('change',persist);els.key.addEventListener('change',persist);els.enabled.addEventListener('change',()=>{persist();setStatus(els.enabled.checked?'idle':'idle',els.enabled.checked?'آماده':'غیرفعال');setMessage(els.enabled.checked?'اتصال فعال شد؛ برای بررسی، آزمون اتصال را اجرا کنید.':'اتصال API غیرفعال شد.')});
+  byId('apiSaveBtn').addEventListener('click',()=>{if(persist())setMessage('تنظیمات API در این مرورگر ذخیره شد.')});
+  byId('apiTestBtn').addEventListener('click',async()=>{if(!persist())return;if(!els.enabled.checked){setMessage('ابتدا کلید فعال‌سازی اتصال API را روشن کنید.',true);return}setStatus('busy','در حال آزمون');setMessage('در حال ارسال درخواست GET به /health …');try{const data=await request('/health',{method:'GET'});setStatus('ok','متصل');setMessage('اتصال موفق بود.'+(data&&data.message?' پاسخ: '+data.message:''))}catch(e){setStatus('err','ناموفق');setMessage((e.name==='AbortError'?'مهلت اتصال پایان یافت. ':e.message+' ')+(e instanceof TypeError?'بررسی CORS، نشانی سرور و اتصال شبکه را انجام دهید.':''),true)}});
+  byId('apiSyncBtn').addEventListener('click',async()=>{if(!persist())return;if(!els.enabled.checked){setMessage('برای همگام‌سازی، اتصال API را فعال کنید.',true);return}setStatus('busy','در حال همگام‌سازی');setMessage('در حال آماده‌سازی وضعیت پروفایل و ارسال آن به Backend …');try{if(typeof window.save==='function')window.save();const payload={profile:window.activeUsername||localStorage.getItem('vazhesanj-v4:active')||'پیش‌فرض',state:window.state||{},exportedAt:new Date().toISOString(),schemaVersion:1};const data=await request('/sync',{method:'POST',body:JSON.stringify(payload)});cfg.lastSync=new Date().toISOString();persist();setStatus('ok','همگام‌سازی موفق');setMessage('داده‌ها با موفقیت به Backend ارسال شد.'+(data&&data.message?' '+data.message:''))}catch(e){setStatus('err','همگام‌سازی ناموفق');setMessage((e.name==='AbortError'?'مهلت همگام‌سازی پایان یافت. ':e.message+' ')+(e instanceof TypeError?'سرور باید CORS را برای این مبدأ مجاز کند.':''),true)}refreshMeta()});
+  refreshMeta();document.addEventListener('change',e=>{if(e.target&&e.target.id==='profileSelect')setTimeout(refreshMeta,100)});window.addEventListener('storage',refreshMeta);
+})();
+
+// Persist the outgoing profile before switching, then initialize the selected profile from its own key.
+const profilePicker=document.getElementById('profileSelect');
+if(profilePicker){
+  profilePicker.innerHTML='';
+  profileNames.forEach(name=>{const option=document.createElement('option');option.value=name;option.textContent=name;profilePicker.appendChild(option);});
+  profilePicker.value=activeUsername;
+  profilePicker.addEventListener('change',()=>{
+    const next=profilePicker.value;if(!next||next===activeUsername)return;
+    if(!save()){profilePicker.value=activeUsername;return;}
+    try{localStorage.setItem(ACTIVE_PROFILE_KEY,next);}
+    catch(error){console.error('Unable to switch active profile:',error);toast('تغییر پروفایل ذخیره نشد: '+error.message,1);profilePicker.value=activeUsername;return;}
+    location.reload();
+  });
+}
+</script>
+
+</body>
+</html>
